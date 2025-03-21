@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid : MonoBehaviour
+public class Obstacle : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private float lifetime = 5f;
     [SerializeField] private float rotationSpeed = 100f;
     private Rigidbody2D rb;
-    private void Start()
+    public void Initialize(Vector2 dir)
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = Vector2.left * speed;
+        rb.velocity = dir * speed;
         Destroy(gameObject, lifetime); // Destroy after lifetime
     }
 

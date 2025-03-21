@@ -70,6 +70,15 @@ public class Spawner : MonoBehaviour
 
         //Spawn Asteroid
         spawnPosition = spawnPoints[spawnIdx].position;
-        Instantiate(spawnPrefabs[0], spawnPosition, Quaternion.identity);
+        int ranY = spawnPoints[spawnIdx].position.y <= 0 ? Random.Range(0, 3) : Random.Range(-3, 0);
+        Vector2 ranDir = new Vector2(Random.Range(-3, -1), ranY);
+        Obstacle obstacle = Instantiate(spawnPrefabs[0], spawnPosition, Quaternion.identity).GetComponent<Obstacle>();
+        obstacle.Initialize(ranDir);
+
+    }
+
+    private void GenerateRandomPos()
+    {
+
     }
 }
