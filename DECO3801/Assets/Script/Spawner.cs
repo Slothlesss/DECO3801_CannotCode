@@ -2,51 +2,93 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct spawnInterval
+{
+    public SpawnableObject obj;
+    public int interval;
+}
+
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] spawnPrefabs;
-    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private Transform[] spawnPoints; //Later will use random instead of predefined pos
     [SerializeField] private GameObject warningPrefab;
-    [SerializeField] private float spawnInterval = 2f;
 
     private float timer = 0f;
+    public spawnInterval[] spawnIntervals;
+
+    private Dictionary<SpawnableObject, GameObject> prefabDictionary;
+
+    private Dictionary<SpawnableObject, float> intervalDictionary;
+    private Dictionary<SpawnableObject, float> nextSpawnTimes;
+    private void Start()
+    {
+        // Initialize the spawnable object dictionary
+        prefabDictionary = new Dictionary<SpawnableObject, GameObject>
+        {
+            { SpawnableObject.Asteroid, spawnPrefabs[0] },
+            { SpawnableObject.Planet, spawnPrefabs[1] }
+        };
+
+
+        // Initialize the interval dictionary
+        intervalDictionary = new Dictionary<SpawnableObject, float>();
+        foreach (var spawnInterval in spawnIntervals)
+        {
+            intervalDictionary[spawnInterval.obj] = spawnInterval.interval;
+        }
+
+        // Initialize the nextSpawnTimes dictionary
+        nextSpawnTimes = new Dictionary<SpawnableObject, float>();
+        foreach (var spawnInterval in spawnIntervals)
+        {
+            nextSpawnTimes[spawnInterval.obj] = spawnInterval.interval;
+        }
+    }
+
     private void Update()
     {
         timer += Time.deltaTime;
 
-        if (timer >= spawnInterval)
-        {
-            Spawn();
-            timer = 0f;
-        }
-    }
-
-    private void Spawn()
-    {
         int randomPrefabIndex = Random.Range(0, spawnPrefabs.Length); // Pick a random prefab
+        SpawnableObject spawnType = (SpawnableObject)randomPrefabIndex;
+
+        if (timer >= nextSpawnTimes[spawnType])
+        {
+            Spawn(spawnType);
+            nextSpawnTimes[spawnType] = timer + intervalDictionary[spawnType];
+        }
+    }
+
+    private void Spawn(SpawnableObject spawnType)
+    {
         int randomSpawnIndex = Random.Range(0, spawnPoints.Length); // Pick a random spawn location
-        if (randomPrefabIndex == 0)
+        switch (spawnType)
         {
-            SpawnAsteroid(randomSpawnIndex);
+            case SpawnableObject.Asteroid:
+                SpawnAsteroid(randomSpawnIndex);
+                break;
+            case SpawnableObject.Planet:
+                SpawnPlanet();
+                break;
         }
-        else
-        {
-            SpawnEnemy(randomPrefabIndex, randomSpawnIndex);
-        }
     }
 
-    private void SpawnAsteroid(int spawnIdx)
+    private void SpawnAsteroid(int posIdx)
     {
-        StartCoroutine(SpawnAsteroidWithWarning(spawnIdx));
+        StartCoroutine(SpawnAsteroidWithWarning(posIdx));
     }
 
-    private void SpawnEnemy(int randomPrefabIndex, int spawnIdx)
+    private void SpawnPlanet()
     {
-
-        Instantiate(spawnPrefabs[spawnIdx], spawnPoints[spawnIdx].position, Quaternion.identity);
+        int randomPosIndex = (Random.Range(0, 2) == 0) ? 0 : 2;
+        Vector2 spawnPos = spawnPoints[randomPosIndex].position + new Vector3(30, 0, 0);
+        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Planet], spawnPos, Quaternion.identity).GetComponent<Obstacle>();
+        obstacle.Initialize(new Vector2(0, 0));
     }
 
-    private IEnumerator SpawnAsteroidWithWarning(int spawnIdx)
+    private IEnumerator SpawnAsteroidWithWarning(int spawnIdx) //Later asteroid won't have warnings, rockets will have
     {
         //Spawn Warning
         Vector3 spawnPosition = spawnPoints[spawnIdx].position;
@@ -72,13 +114,8 @@ public class Spawner : MonoBehaviour
         spawnPosition = spawnPoints[spawnIdx].position;
         int ranY = spawnPoints[spawnIdx].position.y <= 0 ? Random.Range(0, 3) : Random.Range(-3, 0);
         Vector2 ranDir = new Vector2(Random.Range(-3, -1), ranY);
-        Obstacle obstacle = Instantiate(spawnPrefabs[0], spawnPosition, Quaternion.identity).GetComponent<Obstacle>();
+        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Asteroid], spawnPosition, Quaternion.identity).GetComponent<Obstacle>();
         obstacle.Initialize(ranDir);
-
-    }
-
-    private void GenerateRandomPos()
-    {
 
     }
 }
