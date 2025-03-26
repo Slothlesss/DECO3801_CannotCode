@@ -12,11 +12,11 @@ public struct spawnInterval
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] spawnPrefabs;
-    [SerializeField] private Transform[] spawnPoints; //Later will use random instead of predefined pos
-    [SerializeField] private GameObject warningPrefab;
 
     private float timer = 0f;
     public spawnInterval[] spawnIntervals;
+    [SerializeField] private Transform[] spawnPoints; //Later will use random instead of predefined pos
+    [SerializeField] private GameObject warningPrefab;
 
     private Dictionary<SpawnableObject, GameObject> prefabDictionary;
 
@@ -28,7 +28,8 @@ public class Spawner : MonoBehaviour
         prefabDictionary = new Dictionary<SpawnableObject, GameObject>
         {
             { SpawnableObject.Asteroid, spawnPrefabs[0] },
-            { SpawnableObject.Planet, spawnPrefabs[1] }
+            { SpawnableObject.Planet, spawnPrefabs[1] },
+            {SpawnableObject.AsteroidBelt, spawnPrefabs[2] }
         };
 
 
@@ -72,6 +73,9 @@ public class Spawner : MonoBehaviour
             case SpawnableObject.Planet:
                 SpawnPlanet();
                 break;
+            case SpawnableObject.AsteroidBelt:
+                SpawnAsteroidBelt();
+                break;
         }
     }
 
@@ -85,6 +89,14 @@ public class Spawner : MonoBehaviour
         int randomPosIndex = (Random.Range(0, 2) == 0) ? 0 : 2;
         Vector2 spawnPos = spawnPoints[randomPosIndex].position + new Vector3(30, 0, 0);
         Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Planet], spawnPos, Quaternion.identity).GetComponent<Obstacle>();
+        obstacle.Initialize(new Vector2(0, 0));
+    }
+
+    private void SpawnAsteroidBelt()
+    {
+        int randomPosIndex = Random.Range(0, 2);
+        Vector2 spawnPos = spawnPoints[randomPosIndex].position + new Vector3(30, 0, 0);
+        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.AsteroidBelt], spawnPos, Quaternion.identity).GetComponent<Obstacle>();
         obstacle.Initialize(new Vector2(0, 0));
     }
 

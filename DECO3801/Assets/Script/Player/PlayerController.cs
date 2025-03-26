@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool canFire = true;
 
 
-    private float[] positionsY = { -6f, 0f, 6f }; // Allowed Y positions
+    private float[] positionsY = { -3f, 1f, 5f }; // Allowed Y positions
     private int currentPositionIndex = 1; // Start at Y = 0
     private float moveDuration = 0.5f; // Duration of movement
     bool isMoving = false;
