@@ -29,7 +29,8 @@ public class Spawner : MonoBehaviour
         {
             { SpawnableObject.Asteroid, spawnPrefabs[0] },
             { SpawnableObject.Planet, spawnPrefabs[1] },
-            {SpawnableObject.AsteroidBelt, spawnPrefabs[2] }
+            {SpawnableObject.AsteroidBelt, spawnPrefabs[2] },
+            {SpawnableObject.Coin, spawnPrefabs[3] }
         };
 
 
@@ -76,6 +77,9 @@ public class Spawner : MonoBehaviour
             case SpawnableObject.AsteroidBelt:
                 SpawnAsteroidBelt();
                 break;
+            case SpawnableObject.Coin:
+                SpawnCoin();
+                break;
         }
     }
 
@@ -97,6 +101,13 @@ public class Spawner : MonoBehaviour
         int randomPosIndex = Random.Range(0, 2);
         Vector2 spawnPos = spawnPoints[randomPosIndex].position + new Vector3(30, 0, 0);
         Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.AsteroidBelt], spawnPos, Quaternion.identity).GetComponent<Obstacle>();
+        obstacle.Initialize(new Vector2(0, 0)); //Not moving
+    }
+    private void SpawnCoin()
+    {
+        int randomPosIndex = Random.Range(0, 2);
+        Vector2 spawnPos = spawnPoints[randomPosIndex].position + new Vector3(10, 0, 0);
+        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Coin], spawnPos, Quaternion.identity).GetComponent<Obstacle>();
         obstacle.Initialize(new Vector2(0, 0));
     }
 
