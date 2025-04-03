@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Planet
   - Star
+  - Coin
   layers:
   - Default
   - TransparentFX

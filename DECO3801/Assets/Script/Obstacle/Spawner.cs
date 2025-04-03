@@ -29,8 +29,8 @@ public class Spawner : MonoBehaviour
         {
             { SpawnableObject.Asteroid, spawnPrefabs[0] },
             { SpawnableObject.Planet, spawnPrefabs[1] },
-            {SpawnableObject.AsteroidBelt, spawnPrefabs[2] },
-            {SpawnableObject.Coin, spawnPrefabs[3] }
+            { SpawnableObject.AsteroidBelt, spawnPrefabs[2] },
+            { SpawnableObject.Coin, spawnPrefabs[3] }
         };
 
 

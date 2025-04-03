@@ -9,9 +9,9 @@ public class PlayerStats : Singleton<PlayerStats>
     private int score;
     public int Score
     {
-        get 
-        { 
-            return this.score; 
+        get
+        {
+            return this.score;
         }
         set
         {
@@ -19,5 +19,9 @@ public class PlayerStats : Singleton<PlayerStats>
             scoreUI.text = value.ToString();
         }
 
+    }
+    private void Start()
+    {
+        Score = 0;
     }
 }
