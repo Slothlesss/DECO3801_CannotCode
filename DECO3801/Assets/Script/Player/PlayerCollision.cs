@@ -63,7 +63,7 @@ public class PlayerCollision : MonoBehaviour
     private IEnumerator HitCollision()
     {
         SpriteRenderer playerSprite = GetComponent<SpriteRenderer>();
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 15; i++)
         {
             yield return new WaitForSeconds(0.1f);
             playerSprite.color = new Color(1, 1, 1, 0);
