@@ -8,6 +8,7 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private GameObject heartPool;
     [SerializeField] private UIHeart[] hearts;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private float dmgTakenInterval = 1.5f;
     private int health;
     private bool canLoseHealth = true;
 
@@ -52,7 +53,7 @@ public class PlayerCollision : MonoBehaviour
 
         health -= 1;
         canLoseHealth = false;
-        StartCoroutine(HealthCooldown(3f));
+        StartCoroutine(HealthCooldown(dmgTakenInterval));
     }
     private IEnumerator HealthCooldown(float delay)
     {
@@ -63,7 +64,7 @@ public class PlayerCollision : MonoBehaviour
     private IEnumerator HitCollision()
     {
         SpriteRenderer playerSprite = GetComponent<SpriteRenderer>();
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(0.1f);
             playerSprite.color = new Color(1, 1, 1, 0);
