@@ -107,7 +107,7 @@ public class Spawner : MonoBehaviour
     {
         int randomPosIndex = Random.Range(0, 2);
         Vector2 spawnPos = spawnPoints[randomPosIndex].position + new Vector3(10, 0, 0);
-        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Coin], spawnPos, Quaternion.identity).GetComponent<Obstacle>();
+        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Coin], spawnPos, Quaternion.identity).GetComponentInChildren<Obstacle>();
         obstacle.Initialize(new Vector2(0, 0));
     }
 
