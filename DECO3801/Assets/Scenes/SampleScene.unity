@@ -1539,11 +1539,11 @@ MonoBehaviour:
   - {fileID: 6041087695863373319, guid: f45174570afef154491963dc3be54c36, type: 3}
   spawnIntervals:
   - obj: 0
-    interval: 1
-  - obj: 1
-    interval: 4
-  - obj: 2
     interval: 2
+  - obj: 1
+    interval: 7
+  - obj: 2
+    interval: 4
   - obj: 3
     interval: 3
   spawnPoints:

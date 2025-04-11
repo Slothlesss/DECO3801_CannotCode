@@ -1,21 +1,34 @@
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Manages on-screen notifications for different emotional and cognitive states (e.g., frustration, focus, fatigue).
+/// </summary>
 public class NotificationManager : MonoBehaviour
 {
-[SerializeField] private GameObject firstNotification;
-[SerializeField] private GameObject secondNotification;
-[SerializeField] private TextMeshProUGUI firstTitleUI;
-[SerializeField] private TextMeshProUGUI firstContentUI;
-[SerializeField] private TextMeshProUGUI secondTitleUI;
-[SerializeField] private TextMeshProUGUI secondContentUI;
+    [SerializeField] private GameObject firstNotification;
+    [SerializeField] private GameObject secondNotification;
+    [SerializeField] private TextMeshProUGUI firstTitleUI;
+    [SerializeField] private TextMeshProUGUI firstContentUI;
+    [SerializeField] private TextMeshProUGUI secondTitleUI;
+    [SerializeField] private TextMeshProUGUI secondContentUI;
     private GameObject currentPopUp;
     private EmotionCycler emotionCycler;
+
+    /// <summary>
+    /// Initializes the notification system by hiding all pop-ups.
+    /// </summary>
     private void Start() {
         PopUp("FirstNotification", false);
         PopUp("SecondNotification", false);
 
     }
+
+    /// <summary>
+    /// Shows or hides a notification based on its name.
+    /// </summary>
+    /// <param name="name">"FirstNotification" or "SecondNotification".</param>
+    /// <param name="isActive">True to show, false to hide.</param>
     public void PopUp(string name, bool isActive)
     {
         switch (name)
@@ -28,8 +41,10 @@ public class NotificationManager : MonoBehaviour
                 break;
         }
     }
-    
-    // Testing method.
+
+    /// <summary>
+    /// Toggles the visibility of the first notification (for testing).
+    /// </summary>
     public void PopFirst() {
         if (firstTitleUI.IsActive())
         {
@@ -41,6 +56,9 @@ public class NotificationManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Toggles the visibility of the second notification (for testing).
+    /// </summary>
     public void PopSecond() {
         if (secondTitleUI.IsActive())
         {
@@ -52,21 +70,29 @@ public class NotificationManager : MonoBehaviour
         }
     }
 
-    // Update first pop-up notification.
+    /// <summary>
+    /// Updates the first notification’s title and content.
+    /// </summary>
     public void UpdateFirstNotification(string title, string content) {
         firstTitleUI.text = title;
         firstContentUI.text = content;
     }
 
-    // Update second pop-up notification.
+    /// <summary>
+    /// Updates the second notification’s title and content.
+    /// </summary>
     public void UpdateSecondNotification(string title, string content) {
         secondTitleUI.text = title;
         secondContentUI.text = content;
     }
 
-    // Show notification based on the current state of notifications.
-    // If first is active, update second. If second is active, update first.
-   private void ShowNotification(string title, string content, bool useFirstNotification)
+    /// <summary>
+    /// Displays a notification in either the first or second panel.
+    /// </summary>
+    /// <param name="title">The title of the notification.</param>
+    /// <param name="content">The content of the notification.</param>
+    /// <param name="useFirstNotification">If true, shows in the first notification UI; otherwise, second.</param>
+    private void ShowNotification(string title, string content, bool useFirstNotification)
     {
         if (useFirstNotification)
         {
@@ -80,6 +106,10 @@ public class NotificationManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Displays feedback based on the frustration level.
+    /// </summary>
+    /// <param name="frustrationIndex">Level from 0 (calm) to 3 (seriously frustrated).</param>
     public void FrustrationHandler(int frustrationIndex)
     {
         string title = "";
@@ -94,6 +124,10 @@ public class NotificationManager : MonoBehaviour
         ShowNotification(title, content, true);
     }
 
+    /// <summary>
+    /// Displays feedback based on the focus level.
+    /// </summary>
+    /// <param name="focusIndex">Level from 0 (focused) to 3 (seriously distracted).</param>
     public void FocusHandler(int focusIndex)
     {
         string title = "";
@@ -108,6 +142,10 @@ public class NotificationManager : MonoBehaviour
         ShowNotification(title, content, false);
     }
 
+    /// <summary>
+    /// Displays feedback based on the fatigue level.
+    /// </summary>
+    /// <param name="fatigueIndex">Level from 0 (rested) to 3 (seriously fatigued).</param>
     public void FatigueHandler(int fatigueIndex)
     {
         string title = "";

@@ -9,6 +9,10 @@ public struct spawnInterval
     public int interval;
 }
 
+/// <summary>
+/// Spawner is responsible for spawning various game objects at configured intervals and positions,
+/// with some object-specific behavior (e.g., warnings for asteroids).
+/// </summary>
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] spawnPrefabs;
@@ -22,6 +26,10 @@ public class Spawner : MonoBehaviour
 
     private Dictionary<SpawnableObject, float> intervalDictionary;
     private Dictionary<SpawnableObject, float> nextSpawnTimes;
+
+    /// <summary>
+    /// Initializes dictionaries for spawning logic.
+    /// </summary>
     private void Start()
     {
         // Initialize the spawnable object dictionary
@@ -49,6 +57,9 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles spawn timing and calls spawn methods as needed.
+    /// </summary>
     private void Update()
     {
         timer += Time.deltaTime;
@@ -63,6 +74,10 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Dispatches the spawn logic based on object type.
+    /// </summary>
+    /// <param name="spawnType">The type of object to spawn.</param>
     private void Spawn(SpawnableObject spawnType)
     {
         int randomSpawnIndex = Random.Range(0, spawnPoints.Length); // Pick a random spawn location
@@ -83,11 +98,17 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Triggers coroutine to spawn an asteroid with a warning.
+    /// </summary>
     private void SpawnAsteroid(int posIdx)
     {
         StartCoroutine(SpawnAsteroidWithWarning(posIdx));
     }
 
+    /// <summary>
+    /// Spawns a planet at a predefined lateral offset.
+    /// </summary>
     private void SpawnPlanet()
     {
         int randomPosIndex = (Random.Range(0, 2) == 0) ? 0 : 2;
@@ -96,6 +117,9 @@ public class Spawner : MonoBehaviour
         obstacle.Initialize(new Vector2(0, 0));
     }
 
+    /// <summary>
+    /// Spawns a static asteroid belt at a random position.
+    /// </summary>
     private void SpawnAsteroidBelt()
     {
         int randomPosIndex = Random.Range(0, 2);
@@ -103,6 +127,10 @@ public class Spawner : MonoBehaviour
         Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.AsteroidBelt], spawnPos, Quaternion.identity).GetComponent<Obstacle>();
         obstacle.Initialize(new Vector2(0, 0)); //Not moving
     }
+
+    /// <summary>
+    /// Spawns a coin at a random spawn point.
+    /// </summary>
     private void SpawnCoin()
     {
         int randomPosIndex = Random.Range(0, 2);
@@ -111,6 +139,10 @@ public class Spawner : MonoBehaviour
         obstacle.Initialize(new Vector2(0, 0));
     }
 
+    /// <summary>
+    /// Spawns an asteroid after a warning icon flashes. Asteroids are given a randomized movement vector.
+    /// </summary>
+    /// <param name="spawnIdx">Index of the spawn point to use.</param>
     private IEnumerator SpawnAsteroidWithWarning(int spawnIdx) //Later asteroid won't have warnings, rockets will have
     {
         //Spawn Warning
@@ -139,6 +171,5 @@ public class Spawner : MonoBehaviour
         Vector2 ranDir = new Vector2(Random.Range(-3, -1), ranY);
         Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Asteroid], spawnPosition, Quaternion.identity).GetComponent<Obstacle>();
         obstacle.Initialize(ranDir);
-
     }
 }
