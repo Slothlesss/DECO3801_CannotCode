@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handles collision events for the player, including health loss, UI updates, and game over state.
+/// </summary>
 public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private GameObject heartPool;
@@ -12,6 +15,9 @@ public class PlayerCollision : MonoBehaviour
     private int health;
     private bool canLoseHealth = true;
 
+    /// <summary>
+    /// Initializes player health and UI at the start of the game.
+    /// </summary>
     private void Start()
     {
         health = 3;
@@ -19,6 +25,11 @@ public class PlayerCollision : MonoBehaviour
         gameOverPanel.SetActive(false);
     }
 
+    /// <summary>
+    /// Triggered when the player collides with another collider.
+    /// Handles coin collection and enemy collision.
+    /// </summary>
+    /// <param name="other">The collider the player has triggered.</param>
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Coin")) {
@@ -32,6 +43,9 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles health deduction, UI update, and triggers game over if health reaches zero.
+    /// </summary>
     private void LoseHealth()
     {
         StartCoroutine(HitCollision());
@@ -55,12 +69,20 @@ public class PlayerCollision : MonoBehaviour
         canLoseHealth = false;
         StartCoroutine(HealthCooldown(dmgTakenInterval));
     }
+
+    // <summary>
+    /// Waits for a specified time before allowing the player to take damage again.
+    /// </summary>
+    /// <param name="delay">Time to wait before resetting damage cooldown.</param>
     private IEnumerator HealthCooldown(float delay)
     {
         yield return new WaitForSeconds(delay);
         canLoseHealth = true;
     }
 
+    /// <summary>
+    /// Plays a hit animation by flashing the player sprite three times.
+    /// </summary>
     private IEnumerator HitCollision()
     {
         SpriteRenderer playerSprite = GetComponent<SpriteRenderer>();
@@ -73,6 +95,9 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Activates the game over screen and pauses the game.
+    /// </summary>
     private void gameOver()
     {
         gameOverPanel.SetActive(true);

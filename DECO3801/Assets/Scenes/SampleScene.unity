@@ -1539,11 +1539,11 @@ MonoBehaviour:
   - {fileID: 6041087695863373319, guid: f45174570afef154491963dc3be54c36, type: 3}
   spawnIntervals:
   - obj: 0
-    interval: 1
-  - obj: 1
-    interval: 4
-  - obj: 2
     interval: 2
+  - obj: 1
+    interval: 7
+  - obj: 2
+    interval: 4
   - obj: 3
     interval: 3
   spawnPoints:
@@ -1820,6 +1820,7 @@ MonoBehaviour:
   heartPool: {fileID: 1395368225}
   hearts: []
   gameOverPanel: {fileID: 1581233495}
+  dmgTakenInterval: 1.5
 --- !u!61 &472078729
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controls the player’s movement between fixed vertical lanes and shooting projectiles.
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
@@ -18,13 +21,17 @@ public class PlayerController : MonoBehaviour
     private float moveDuration = 0.5f; // Duration of movement
     bool isMoving = false;
 
-
+    /// <summary>
+    /// Initializes the Rigidbody2D component.
+    /// </summary>
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Updates the player each frame by handling movement and shooting.
+    /// </summary>
     private void Update()
     {
 
@@ -32,6 +39,9 @@ public class PlayerController : MonoBehaviour
         HandleShooting();
     }
 
+    /// <summary>
+    /// Handles vertical movement using W and S keys.
+    /// </summary>
     private void HandleMovement()
     {
 
@@ -45,6 +55,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Smoothly moves the player up or down between predefined Y positions.
+    /// </summary>
+    /// <param name="direction">1 for up, -1 for down.</param>
     private IEnumerator MovePlayer(int direction)
     {
         isMoving = true;
@@ -72,6 +86,9 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
     }
 
+    /// <summary>
+    /// Handles input and reload logic for shooting projectiles.
+    /// </summary>
     private void HandleShooting()
     {
         timer += Time.deltaTime;
@@ -88,6 +105,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Instantiates a projectile at the fire point.
+    /// </summary>
     private void FireProjectile()
     {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
