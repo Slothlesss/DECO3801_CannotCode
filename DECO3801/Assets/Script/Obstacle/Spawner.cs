@@ -172,7 +172,7 @@ public class Spawner : MonoBehaviour
         int ranX = Random.Range(-2, -1);
         int ranY = spawnPoints[spawnIdx].position.y <= 0 ? Random.Range(0, 3) : Random.Range(-3, 0);
         Vector2 ranDir = new Vector2(ranX, ranY);
-        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Asteroid], spawnPosition, Quaternion.identity).GetComponentInChildren<Obstacle>();
+        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Asteroid], spawnPosition, Quaternion.identity).GetComponent<Obstacle>();
         obstacle.Initialize(ranDir);
     }
 
