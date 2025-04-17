@@ -11,12 +11,10 @@ public class Asteroid : Obstacle
     {
         if (other.CompareTag("Bullet"))
         {
-            if (effect)
-            {
-                effect.Play();
-                gameObject.SetActive(false);
-                Destroy(transform.parent.gameObject, 1f);
-            }
+            effect.Play();
+            GetComponent<Collider2D>().enabled = false;
+            transform.GetChild(0).gameObject.SetActive(false);
+            Destroy(gameObject, 1f);
         }
     }
 }
