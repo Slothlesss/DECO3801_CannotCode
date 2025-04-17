@@ -1533,7 +1533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPrefabs:
-  - {fileID: 4948483826736189375, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
+  - {fileID: 5643663765642762436, guid: 616b2794fe4feaa49beeda469e08cda2, type: 3}
   - {fileID: 515793603667588855, guid: 5718c5fa87e68fb47a582b9ac2edd449, type: 3}
   - {fileID: 4769955918530853184, guid: b93618e3b34d81d448b5b044b2c68bd4, type: 3}
   - {fileID: 6041087695863373319, guid: f45174570afef154491963dc3be54c36, type: 3}
@@ -1541,11 +1541,11 @@ MonoBehaviour:
   - obj: 0
     interval: 2
   - obj: 1
-    interval: 7
+    interval: 5
   - obj: 2
-    interval: 4
-  - obj: 3
     interval: 3
+  - obj: 3
+    interval: 4
   spawnPoints:
   - {fileID: 1512041376}
   - {fileID: 293153722}
@@ -1556,6 +1556,7 @@ MonoBehaviour:
   - {fileID: 1221139526}
   - {fileID: 1510372151}
   warningPrefab: {fileID: 7746903751716918988, guid: 12e3aed581f750a43acc444a3b99831e, type: 3}
+  currentDifficulty: 0
 --- !u!1 &448604209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,7 +1854,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06722832, y: 0.00000023841858}
+  m_Offset: {x: 0.04228401, y: 0.017663479}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1864,7 +1865,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.403385, y: 3.3778415}
+  m_Size: {x: 1.4430141, y: 1.2653103}
   m_EdgeRadius: 0
 --- !u!114 &472078730
 MonoBehaviour:
@@ -4942,63 +4943,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162774947}
   m_CullTransparentMesh: 1
---- !u!1001 &1162994876
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4720515209984421293, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 4720515209984421293, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4720515209984421293, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4720515209984421293, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4720515209984421293, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4720515209984421293, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4720515209984421293, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4720515209984421293, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4720515209984421293, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4720515209984421293, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4948483826736189375, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
-      propertyPath: m_Name
-      value: Asteroid
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 12c44902b38bc8b46855a3e3ec62a312, type: 3}
 --- !u!1 &1202141923
 GameObject:
   m_ObjectHideFlags: 0
@@ -8197,4 +8141,3 @@ SceneRoots:
   - {fileID: 1007985491}
   - {fileID: 247166516}
   - {fileID: 87927467}
-  - {fileID: 1162994876}

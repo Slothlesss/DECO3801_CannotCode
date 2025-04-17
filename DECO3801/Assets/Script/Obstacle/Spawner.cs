@@ -137,8 +137,8 @@ public class Spawner : MonoBehaviour
     {
         int randomPosIndex = Random.Range(0, 2);
         Vector2 spawnPos = spawnPoints[randomPosIndex].position + new Vector3(10, 0, 0);
-        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Coin], spawnPos, Quaternion.identity).GetComponentInChildren<Obstacle>();
-        obstacle.Initialize(new Vector2(0, 0));
+        Collectable collectable = Instantiate(prefabDictionary[SpawnableObject.Coin], spawnPos, Quaternion.identity).GetComponentInChildren<Collectable>();
+        collectable.Initialize(new Vector2(0, 0));
     }
 
     /// <summary>
@@ -169,9 +169,10 @@ public class Spawner : MonoBehaviour
 
         //Spawn Asteroid
         spawnPosition = spawnPoints[spawnIdx].position;
+        int ranX = Random.Range(-2, -1);
         int ranY = spawnPoints[spawnIdx].position.y <= 0 ? Random.Range(0, 3) : Random.Range(-3, 0);
-        Vector2 ranDir = new Vector2(Random.Range(-3, -1), ranY);
-        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Asteroid], spawnPosition, Quaternion.identity).GetComponent<Obstacle>();
+        Vector2 ranDir = new Vector2(ranX, ranY);
+        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Asteroid], spawnPosition, Quaternion.identity).GetComponentInChildren<Obstacle>();
         obstacle.Initialize(ranDir);
     }
 
