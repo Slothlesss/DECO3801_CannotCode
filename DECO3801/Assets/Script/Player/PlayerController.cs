@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool canFire = true;
 
     private float[] positionsY = { -3f, 1f, 5f }; // Allowed Y positions
-    private int currentPositionIndex = 1; // Start at Y = 0
+    private int currentPositionIndex = 1; // Start at positionY[1]
     private float moveDuration = 0.5f; // Duration of movement
     bool isMoving = false;
 
@@ -65,7 +65,10 @@ public class PlayerController : MonoBehaviour
         int newPositionIndex = Mathf.Clamp(currentPositionIndex + direction, 0, positionsY.Length - 1);
 
         if (newPositionIndex == currentPositionIndex) // No change in position
+        {
+            isMoving = false;
             yield break;
+        }
 
         currentPositionIndex = newPositionIndex;
         float startY = transform.position.y;
