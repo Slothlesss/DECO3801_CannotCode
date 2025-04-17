@@ -5,19 +5,21 @@ using UnityEngine;
 /// <summary>
 /// Represents an obstacle in the game that moves, rotates, and interacts with the player.
 /// </summary>
-public class Obstacle : MonoBehaviour
+public abstract class Obstacle : MonoBehaviour
 {
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float lifetime = 5f;
-    [SerializeField] private float rotationSpeed = 100f;
+    [SerializeField] protected float speed = 10f;
+    [SerializeField] protected float lifetime = 5f;
+    [SerializeField] protected float rotationSpeed = 100f;
     private Rigidbody2D rb;
+
+    [SerializeField] protected ParticleSystem effect;
 
     /// <summary>
     /// Initializes the obstacle with a movement direction and sets its velocity.
     /// Also schedules its destruction after a set lifetime.
     /// </summary>
     /// <param name="dir">The direction the obstacle should move in.</param>
-    public void Initialize(Vector2 dir)
+    public virtual void Initialize(Vector2 dir)
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = dir * speed;
@@ -27,7 +29,7 @@ public class Obstacle : MonoBehaviour
     /// <summary>
     /// Rotates the obstacle continuously every frame.
     /// </summary>
-    private void Update()
+    protected virtual void Update()
     {
         transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
     }
@@ -37,7 +39,7 @@ public class Obstacle : MonoBehaviour
     /// Destroys both the player and the obstacle upon contact.
     /// </summary>
     /// <param name="other">The collider that entered the trigger.</param>
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
