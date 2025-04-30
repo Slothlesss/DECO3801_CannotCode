@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Handles collision events for the player, including health loss, UI updates, and game over state.
@@ -14,6 +15,14 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private float dmgTakenInterval = 1.5f;
     private int health;
     private bool canLoseHealth = true;
+
+    [SerializeField] private TextMeshProUGUI gameOverCoinsUI;
+
+    [SerializeField] private TextMeshProUGUI gameOverScoreUI;
+
+    private int coins;
+
+    private int score;
 
     /// <summary>
     /// Initializes player health and UI at the start of the game.
@@ -35,7 +44,7 @@ public class PlayerCollision : MonoBehaviour
         if (other.CompareTag("Coin")) {
             Destroy(other.gameObject);
             // Update UI Score
-            PlayerStats.Instance.Score++;
+            PlayerStats.Instance.Coins++;
         }
         if (other.CompareTag("Enemy") && canLoseHealth)
         {
@@ -61,7 +70,7 @@ public class PlayerCollision : MonoBehaviour
         {
             // If player has last all 3 hearts, game is over.
             hearts[0].GetComponent<Image>().color = Color.grey;
-            gameOver();
+            GameOver();
         }
         Debug.Log("Lose Heath");
 
@@ -98,8 +107,14 @@ public class PlayerCollision : MonoBehaviour
     /// <summary>
     /// Activates the game over screen and pauses the game.
     /// </summary>
-    private void gameOver()
+    private void GameOver()
     {
+        score = PlayerStats.Instance.Score;
+        gameOverScoreUI.text = "Score: " + score.ToString();
+        
+        coins = PlayerStats.Instance.Coins;
+        gameOverCoinsUI.text = "Coins: " + coins.ToString();
+
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
     }

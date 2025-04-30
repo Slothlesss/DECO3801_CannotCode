@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 /// <summary>
-/// Controls the player’s movement between fixed vertical lanes and shooting projectiles.
+/// Controls the playerï¿½s movement between fixed vertical lanes and shooting projectiles.
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
@@ -114,7 +117,5 @@ public class PlayerController : MonoBehaviour
     private void FireProjectile()
     {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-    }
-    
-    
+    } 
 }
