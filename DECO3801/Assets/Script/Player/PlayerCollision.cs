@@ -39,11 +39,26 @@ public class PlayerCollision : MonoBehaviour
     /// Handles coin collection and enemy collision.
     /// </summary>
     /// <param name="other">The collider the player has triggered.</param>
+    private IEnumerator CollectCoin(GameObject coin)
+    {
+        Animator anim = coin.GetComponent<Animator>();
+        if (anim != null)
+        {
+            anim.SetTrigger("Collect");
+            yield return new WaitForSeconds(0.4f); // match animation length
+        }
+        else
+        {
+        yield return new WaitForSeconds(0.2f); // fallback
+        }
+
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Coin")) {
-            Destroy(other.gameObject);
-            // Update UI Score
+            PlayerStats.Instance.Score++;
+            StartCoroutine(CollectCoin(other.gameObject));
             PlayerStats.Instance.Coins++;
         }
         if (other.CompareTag("Enemy") && canLoseHealth)
