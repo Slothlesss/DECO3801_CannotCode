@@ -66,6 +66,7 @@ public class EmotionCycler : MonoBehaviour
         return fatigueIndex;
     }
 
+
     /// <summary>
     /// Increases the Frustration level and updates UI and notifications.
     /// </summary>
