@@ -20,8 +20,23 @@ public class PlayerStats : Singleton<PlayerStats>
         }
 
     }
+    
+    public int Coins
+    {
+        get
+        {
+            return this.score;
+        }
+        set
+        {
+            this.score = value;
+            scoreUI.text = value.ToString();
+        }
+
+    }
     private void Start()
     {
         Score = 0;
+        Coins = 0;
     }
 }

@@ -48,15 +48,11 @@ public class PlayerCollision : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Coin")) {
-<<<<<<< Updated upstream
             Destroy(other.gameObject);
             // Update UI Score
             PlayerStats.Instance.Score++;
-=======
             StartCoroutine(CollectCoin(other.gameObject));
             PlayerStats.Instance.Coins++;
-            Destroy(other.gameObject);
->>>>>>> Stashed changes
         }
         if (other.CompareTag("Enemy") && canLoseHealth)
         {
