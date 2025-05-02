@@ -13,7 +13,7 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private UIHeart[] hearts;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private float dmgTakenInterval = 1.5f;
-    private int health;
+    public int health;
     private bool canLoseHealth = true;
 
     [SerializeField] private TextMeshProUGUI gameOverCoinsUI;
@@ -34,11 +34,6 @@ public class PlayerCollision : MonoBehaviour
         gameOverPanel.SetActive(false);
     }
 
-    /// <summary>
-    /// Triggered when the player collides with another collider.
-    /// Handles coin collection and enemy collision.
-    /// </summary>
-    /// <param name="other">The collider the player has triggered.</param>
     private IEnumerator CollectCoin(GameObject coin)
     {
         Animator anim = coin.GetComponent<Animator>();
@@ -54,6 +49,11 @@ public class PlayerCollision : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Triggered when the player collides with another collider.
+    /// Handles coin collection and enemy collision.
+    /// </summary>
+    /// <param name="other">The collider the player has triggered.</param>
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Coin")) {
@@ -124,13 +124,13 @@ public class PlayerCollision : MonoBehaviour
     /// </summary>
     private void GameOver()
     {
-        gameOverPanel.SetActive(true);
-        Time.timeScale = 0f;
-
-        //score = PlayerStats.Instance.Score;
-        //gameOverScoreUI.text = "Score: " + score.ToString();
+        score = PlayerStats.Instance.Score;
+        gameOverScoreUI.text = score.ToString();
         
-        //coins = PlayerStats.Instance.Coins;
-        //gameOverCoinsUI.text = "Coins: " + coins.ToString();
+        coins = PlayerStats.Instance.Coins;
+        gameOverCoinsUI.text = coins.ToString();
+        
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;       
     }
 }

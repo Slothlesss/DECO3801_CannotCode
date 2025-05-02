@@ -54,8 +54,16 @@ public class PlayerStats : Singleton<PlayerStats>
 
     private void Update()
     {
-        scoreFloat += 0.1f;
-        Score = Mathf.RoundToInt(scoreFloat);
+        PlayerCollision playerCollision = FindObjectOfType<PlayerCollision>();
+        if (playerCollision != null && playerCollision.health != 0)
+        {
+            scoreFloat += 0.1f;
+            Score = Mathf.RoundToInt(scoreFloat);
+        }
+        else if (playerCollision != null && playerCollision.health == 0)
+        {
+            Score = Mathf.RoundToInt(scoreFloat);
+        }
     }
 
 
