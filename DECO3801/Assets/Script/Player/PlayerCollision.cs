@@ -124,13 +124,13 @@ public class PlayerCollision : MonoBehaviour
     /// </summary>
     private void GameOver()
     {
-        score = PlayerStats.Instance.Score;
-        gameOverScoreUI.text = "Score: " + score.ToString();
-        
-        coins = PlayerStats.Instance.Coins;
-        gameOverCoinsUI.text = "Coins: " + coins.ToString();
-
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
+
+        //score = PlayerStats.Instance.Score;
+        //gameOverScoreUI.text = "Score: " + score.ToString();
+        
+        //coins = PlayerStats.Instance.Coins;
+        //gameOverCoinsUI.text = "Coins: " + coins.ToString();
     }
 }
