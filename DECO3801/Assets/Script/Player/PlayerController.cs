@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private float[] positionsY = { -3f, 1f, 5f }; // Allowed Y positions
     private int currentPositionIndex = 1; // Start at positionY[1]
-    private float moveDuration = 0.5f; // Duration of movement
+    private float moveDuration = 0.3f; // Duration of movement
     bool isMoving = false;
 
     /// <summary>
