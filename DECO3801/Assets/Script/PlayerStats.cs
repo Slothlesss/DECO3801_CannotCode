@@ -52,6 +52,7 @@ public class PlayerStats : Singleton<PlayerStats>
         Score = 0;
     }
 
+    // starts and stops score when player is alive or dead
     private void Update()
     {
         PlayerCollision playerCollision = FindObjectOfType<PlayerCollision>();
