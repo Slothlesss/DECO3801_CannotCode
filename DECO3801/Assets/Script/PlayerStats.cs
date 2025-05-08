@@ -44,8 +44,6 @@ public class PlayerStats : Singleton<PlayerStats>
         }
 
     }
-
-    
     private void Start()
     {
         Coins = 0;
