@@ -19,10 +19,11 @@ public class PlayerController : MonoBehaviour
     private float timer = 0f;
     private bool canFire = true;
 
-    private float[] positionsY = { -3f, 1f, 5f }; // Allowed Y positions
+    private float[] positionsY = { -3f, -1f, 1f, 3f, 5f }; // Allowed Y positions
     private int currentPositionIndex = 1; // Start at positionY[1]
-    private float moveDuration = 0.3f; // Duration of movement
+    private float moveDuration = 0.15f; // Duration of movement
     bool isMoving = false;
+    private int heldDirection = 0; // 1 for W, -1 for S, 0 for none
 
     /// <summary>
     /// Initializes the Rigidbody2D component.
@@ -47,14 +48,16 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void HandleMovement()
     {
+        if (Input.GetKey(KeyCode.W))
+            heldDirection = 1;
+        else if (Input.GetKey(KeyCode.S))
+            heldDirection = -1;
+        else
+            heldDirection = 0;
 
-        if (Input.GetKeyDown(KeyCode.W) && !isMoving)
+        if (!isMoving && heldDirection != 0)
         {
-            StartCoroutine(MovePlayer(1));
-        }
-        else if (Input.GetKeyDown(KeyCode.S) && !isMoving)
-        {
-            StartCoroutine(MovePlayer(-1));
+            StartCoroutine(MovePlayer(heldDirection));
         }
     }
 
@@ -65,9 +68,10 @@ public class PlayerController : MonoBehaviour
     private IEnumerator MovePlayer(int direction)
     {
         isMoving = true;
+
         int newPositionIndex = Mathf.Clamp(currentPositionIndex + direction, 0, positionsY.Length - 1);
 
-        if (newPositionIndex == currentPositionIndex) // No change in position
+        if (newPositionIndex == currentPositionIndex) // Can't move further
         {
             isMoving = false;
             yield break;
@@ -87,9 +91,19 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        isMoving = false;
-        // Ensure precise Y position at the end
+        // Snap to final Y position
         transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
+        isMoving = false;
+
+        // Auto-move again if still holding key and another move is possible
+        if (heldDirection == 1 && Input.GetKey(KeyCode.W) && currentPositionIndex < positionsY.Length - 1)
+        {
+            StartCoroutine(MovePlayer(1));
+        }
+        else if (heldDirection == -1 && Input.GetKey(KeyCode.S) && currentPositionIndex > 0)
+        {
+            StartCoroutine(MovePlayer(-1));
+        }
     }
 
     /// <summary>
