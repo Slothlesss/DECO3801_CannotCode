@@ -34,6 +34,7 @@ public class PlayerCollision : MonoBehaviour
         gameOverPanel.SetActive(false);
     }
 
+    // Handles coin collection animation.
     private IEnumerator CollectCoin(GameObject coin)
     {
         Animator anim = coin.GetComponent<Animator>();
@@ -57,7 +58,6 @@ public class PlayerCollision : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Coin")) {
-            Destroy(other.gameObject);
             // Update UI Score
             PlayerStats.Instance.Score++;
             StartCoroutine(CollectCoin(other.gameObject));
