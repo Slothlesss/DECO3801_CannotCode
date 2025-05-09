@@ -10,9 +10,13 @@ public class Client : MonoBehaviour
     private NetworkStream stream;
     private Thread receiveThread;
 
-    public string serverIP = "127.0.0.1"; // or your Python IP
+    public string serverIP = "127.0.0.1";
     public int port = 5050;
 
+    /// <summary>
+    /// Establishes a TCP connection to the server at the specified IP and port.
+    /// Starts a background thread to receive data from the server.
+    /// </summary>
     public void ConnectToServer()
     {
         try
@@ -32,6 +36,10 @@ public class Client : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sends a UTF-8 encoded message to the server.
+    /// </summary>
+    /// <param name="message">The message to send to the server.</param>
     public void SendMessageToServer(string message)
     {
         if (stream != null)
@@ -42,6 +50,11 @@ public class Client : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Continuously listens for incoming messages from the server.
+    /// Reads the length prefix of the message, then the actual message content.
+    /// Outputs the received message to the Unity console.
+    /// </summary>
     private void ReceiveData()
     {
         while (true)
