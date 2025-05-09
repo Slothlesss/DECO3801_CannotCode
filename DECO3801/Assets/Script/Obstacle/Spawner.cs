@@ -6,7 +6,7 @@ using UnityEngine;
 public struct spawnInterval
 {
     public SpawnableObject obj;
-    public int interval;
+    public float interval;
 }
 
 /// <summary>
