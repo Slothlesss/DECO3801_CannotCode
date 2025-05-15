@@ -4,7 +4,7 @@
 </p>
         
 ## Welcome to "Mind Over Matter"
-Mind Over Matter is a 2D side-scrolling platformer designed to be played using a Brain-Computer Interface (BCI) headset.
+Mind Over Matter is a brain-computer interaction (BCI) powered 2D side scroller game in which players control a spaceship and must fly as far as possible without crashing. The player will have to avoid procedurally generated obstacles including asteroids, moons, planets and other spaceships. Certain obstacles can also be shot by the laser cannons on the player’s ship to destroy them. The player’s ship will be controlled using the traditional paradigm of a keyboard, however the game’s environment will automatically adapt to the user’s cognitive state based on data sent by an EEG (electroencephalogram) headset.
 
 ## Table Of Contents
 - [Getting Started](#getting-started)
