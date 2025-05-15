@@ -8,6 +8,9 @@ Description here.
     + [1. Setup Unity](#1-setup-unity)
     + [2. Run server.py file](#2-run-server.py-file)
     + [3. Setup Headset](#3-setup-headset)
+- [How To Play](#how-to-play)
+    + [1. Player Mode Selection](#1-player-mode-selection)
+    + [2. Player Movement](#2-player-movement)
 - [Lisence](#license)
 
 
@@ -18,14 +21,16 @@ Description here.
 3. Open the Unity Project of `./DECO3801_CannotCode` in Unity Version **2022.3.17f1** or higher.
 
 ### 2. Run server.py file
-1. Open the server.py in './DECO3801_CannotCode/Asset/Scripts/server.py' with Visual Studio Code.
+1. Open the server.py in `./DECO3801_CannotCode/Asset/Scripts/server.py` with Visual Studio Code.
 2. Open the terminal
 3. Insert a command python server.py until you see ...
 
 ### 3. Setup Headset
 
 
-###
+## How To Play
+### 1. Player Mode Selection
+### 2. Player Movement
 
 ## License
 Current assets used:
