@@ -38,7 +38,7 @@ public class VerticalOscillator : MonoBehaviour
         float camHeight = 2f * cam.orthographicSize;
         float camWidth = camHeight * cam.aspect;
 
-        float rightX = cam.transform.position.x + camWidth / 2 - 0.5f;
+        float rightX = cam.transform.position.x + camWidth / 2 - 1.5f;
         float centerY = cam.transform.position.y + 1.15f;
 
         return new Vector3(rightX, centerY, 0);

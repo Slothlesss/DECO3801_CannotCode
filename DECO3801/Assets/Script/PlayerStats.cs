@@ -6,14 +6,33 @@ using UnityEngine.SceneManagement;
 
 public class PlayerStats : Singleton<PlayerStats>
 {
+    /// <summary>
+    /// Int for number of coins collected by the player.
+    /// </summary>
     private int coins;
+    /// <summary>
+    /// UI text for coins collected.
+    /// </summary>
     [SerializeField] private TextMeshProUGUI coinsUI;
-    // [SerializeField] private TextMeshProUGUI gameOverCoinsUI;
 
-    [SerializeField] private TextMeshProUGUI scoreUI;
-    // [SerializeField] private TextMeshProUGUI gameOverScoreUI;
+    /// <summary>
+    /// Int for player score based on distance travelled.
+    /// </summary>
     private int score;
+    /// <summary>
+    /// UI text for score.
+    /// </summary>
+    [SerializeField] private TextMeshProUGUI scoreUI;
+    /// <summary>
+    /// Float storage of score for casting to an int.
+    /// </summary>
     private float scoreFloat;
+
+    private bool gameStarted = false;
+
+    public int players;
+
+    [SerializeField] private GameObject startPanel;
 
     public int Coins
     {
@@ -25,7 +44,6 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             this.coins = value;
             coinsUI.text = value.ToString();
-            // gameOverCoinsUI.text = "Coins:" + value.ToString();
         }
 
     }
@@ -40,7 +58,6 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             this.score = value;
             scoreUI.text = "Score: " + value.ToString();
-            // gameOverScoreUI.text = "Score: " + value.ToString();
         }
 
     }
@@ -48,10 +65,59 @@ public class PlayerStats : Singleton<PlayerStats>
     {
         Coins = 0;
         Score = 0;
+
+        if(!gameStarted) {
+            Time.timeScale = 0;
+        } 
+        
+        else {
+            startPanel.SetActive(false);
+        }
     }
 
-    // starts and stops score when player is alive or dead
+    /// <summary>
+    /// Runs when game is active, stops when game is over.
+    /// </summary>
     private void Update()
+    {
+        UpdateScore();
+    }
+
+    /// <summary>
+    /// Starts game when button is pressed.
+    /// </summary>
+    public void Play() {
+        Time.timeScale = 1f;
+        gameStarted = true;
+        startPanel.SetActive(false);
+    }
+
+    public void OnePlayer() {
+        players = 1;
+        Play();
+    }
+
+    public void TwoPlayers() {
+        players = 2;
+        Play();
+    }
+
+    /// <summary>
+    /// Replays game when button is pressed.
+    /// </summary>
+    public void Replay() {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>
+    /// Exits game when button is pressed.
+    /// </summary>
+    public void Quit() {
+        Application.Quit();
+    }
+
+    private void UpdateScore()
     {
         PlayerCollision playerCollision = FindObjectOfType<PlayerCollision>();
         if (playerCollision != null && playerCollision.health != 0)
@@ -63,17 +129,5 @@ public class PlayerStats : Singleton<PlayerStats>
         {
             Score = Mathf.RoundToInt(scoreFloat);
         }
-    }
-
-
-    public void Replay() {
-        // Score = 0;
-        // Coins = 0;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    public void Quit() {
-        Application.Quit();
     }
 }
