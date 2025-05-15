@@ -19,22 +19,22 @@ Mind Over Matter is a brain-computer interaction (BCI) powered 2D side scroller 
 
 ## Getting Started
 ### 1. Setup Unity
-1. The Unity Editor is required. Download it from <a href="https://unity.com/download">Unity3d.com/get-unity/download</a>.
-2. Download the project via
+- The Unity Editor is required. Download it from <a href="https://unity.com/download">Unity3d.com/get-unity/download</a>.
+- Download the project via
 ```bash  
 git clone https://github.com/Slothlesss/DECO3801_CannotCode
 ```
-3. Open Unity Editor.
-4. Click Add -> Add project from disk
-5. Navigate to the cloned project folder `./DECO3801_CannotCode/DECO3801`
-6. Open it using Unity version 2022.3.17f1 or higher.
+- Open Unity Editor.
+- Click Add -> Add project from disk
+- Navigate to the cloned project folder `./DECO3801_CannotCode/DECO3801`
+- Open it using Unity version 2022.3.17f1 or higher.
 ![image](https://github.com/user-attachments/assets/3ac798d2-8da6-4476-bb60-f7be6ddbb0f7)
 
 
 ### 2. Run server.py file
-1. Navigate to `./DECO3801_CannotCode/Asset/Scripts/server.py`.
-2. Open the file using Visual Studio Code (or any Python-supporting IDE).
-3. In the terminal, run:
+- Navigate to `./DECO3801_CannotCode/Asset/Scripts/server.py`.
+- Open the file using Visual Studio Code (or any Python-supporting IDE).
+- In the terminal, run:
 
    ```
    python server.py
@@ -43,13 +43,13 @@ git clone https://github.com/Slothlesss/DECO3801_CannotCode
 5. Wait for the message indicating "Server listening on port ...".
 
 ### 3. Setup Headset
-1. abc
-2. bcd
+- abc
+- bcd
 
 ### 4. Start the game
-1. Navigate to `./DECO3801_CannotCode/Asset/Scenes/SampleScene`.
-2. Double-click `SampleScene`.
-3. Click the Play button at the top of the Unity Editor to start the game.
+- Navigate to `./DECO3801_CannotCode/Asset/Scenes/SampleScene`.
+- Double-click `SampleScene`.
+- Click the Play button at the top of the Unity Editor to start the game.
 
 ## 🎮 How To Play
 ### 1. Player Mode Selection
