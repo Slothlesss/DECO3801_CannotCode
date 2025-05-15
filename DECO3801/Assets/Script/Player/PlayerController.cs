@@ -13,8 +13,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
     private Rigidbody2D rb;
 
+    [Header("Gun")]
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private Slider reloadSlider;
     [SerializeField] private float reloadTime = 0.5f;
     private float timer = 0f;
     private bool canFire = true;
@@ -31,6 +33,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        reloadSlider.value = timer;
+        reloadSlider.minValue = 0;
+        reloadSlider.maxValue = reloadTime;
     }
 
     /// <summary>
@@ -112,16 +117,17 @@ public class PlayerController : MonoBehaviour
     private void HandleShooting()
     {
         timer += Time.deltaTime;
+        reloadSlider.value = timer;
         if (timer > reloadTime)
         {
             canFire = true;
-            timer = 0f;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canFire)
         {
             canFire = false;
             FireProjectile();
+            timer = 0f;
         }
     }
 
