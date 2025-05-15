@@ -1,6 +1,6 @@
 # DECO3801_CannotCode
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/d3fee8bb-6340-4fee-b9f2-c201fcfd1047/>
+    <img src="https://github.com/user-attachments/assets/d3fee8bb-6340-4fee-b9f2-c201fcfd1047" />
 </p>
         
 ## Welcome to "Mind Over Matter"
