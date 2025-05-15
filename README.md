@@ -2,7 +2,8 @@
 ![image](https://github.com/user-attachments/assets/d3fee8bb-6340-4fee-b9f2-c201fcfd1047)
 
 ## Welcome to "Mind Over Matter"
-Description here.
+Mind Over Matter is a 2D side-scrolling platformer designed to be played using a Brain-Computer Interface (BCI) headset.
+
 ## Table Of Contents
 - [Getting Started](#getting-started)
     + [1. Setup Unity](#1-setup-unity)
@@ -21,17 +22,29 @@ Description here.
 3. Open the Unity Project of `./DECO3801_CannotCode` in Unity Version **2022.3.17f1** or higher.
 
 ### 2. Run server.py file
-1. Open the server.py in `./DECO3801_CannotCode/Asset/Scripts/server.py` with Visual Studio Code.
-2. Open the terminal
-3. Insert a command python server.py until you see ...
+1. Navigate to `./DECO3801_CannotCode/Asset/Scripts/server.py`.
+2. Open the file using Visual Studio Code (or any Python-supporting IDE).
+3. In the terminal, run: 
+   ```bash
+   python server.py
+   ```
+5. Wait for the message indicating "Server listening on port ...".
 
 ### 3. Setup Headset
 
 
 ## How To Play
 ### 1. Player Mode Selection
-### 2. Player Movement
+Players can choose between 1 Player or 2 Player mode using left/right buttons.
+![image](https://github.com/user-attachments/assets/efc91298-da52-4af3-8be7-9e4a2993b713)
 
+### 2. Player Movement
+- Player 1 (Left side)
+Go Up: A
+Go Down: W
+- Player 2 (Right side)
+Go Up: ↑ (Up Arrow)
+Go Down: ↓ (Down Arrow)
 ## License
 Current assets used:
 - Talia's arts.
