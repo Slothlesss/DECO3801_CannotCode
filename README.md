@@ -25,7 +25,7 @@ Mind Over Matter is a 2D side-scrolling platformer designed to be played using a
 1. Navigate to `./DECO3801_CannotCode/Asset/Scripts/server.py`.
 2. Open the file using Visual Studio Code (or any Python-supporting IDE).
 3. In the terminal, run: 
-   ```
+   ```console
    python server.py
    ```
 5. Wait for the message indicating "Server listening on port ...".
@@ -33,7 +33,7 @@ Mind Over Matter is a 2D side-scrolling platformer designed to be played using a
 ### 3. Setup Headset
 
 
-## How To Play
+## 🎮 How To Play
 ### 1. Player Mode Selection
 Players can choose between 1 Player or 2 Player mode using left/right buttons.
 ![image](https://github.com/user-attachments/assets/efc91298-da52-4af3-8be7-9e4a2993b713)
