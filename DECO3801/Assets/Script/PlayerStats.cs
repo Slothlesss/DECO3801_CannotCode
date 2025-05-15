@@ -34,6 +34,8 @@ public class PlayerStats : Singleton<PlayerStats>
 
     [SerializeField] private GameObject startPanel;
 
+    [SerializeField] private GameObject tutorialPanel;
+
     public int Coins
     {
         get
@@ -63,16 +65,9 @@ public class PlayerStats : Singleton<PlayerStats>
     }
     private void Start()
     {
+        Time.timeScale = 0;
         Coins = 0;
         Score = 0;
-
-        if(!gameStarted) {
-            Time.timeScale = 0;
-        } 
-        
-        else {
-            startPanel.SetActive(false);
-        }
     }
 
     /// <summary>
@@ -80,7 +75,9 @@ public class PlayerStats : Singleton<PlayerStats>
     /// </summary>
     private void Update()
     {
-        UpdateScore();
+        if(gameStarted) {
+            UpdateScore();
+        }
     }
 
     /// <summary>
@@ -100,6 +97,14 @@ public class PlayerStats : Singleton<PlayerStats>
     public void TwoPlayers() {
         players = 2;
         Play();
+    }
+
+    public void ShowTutorial() {
+        tutorialPanel.SetActive(true);
+    }
+
+    public void CloseTutorial() {
+        tutorialPanel.SetActive(false);
     }
 
     /// <summary>
