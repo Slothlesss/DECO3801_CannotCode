@@ -40,11 +40,11 @@ Players can choose between 1 Player or 2 Player mode using left/right buttons.
 
 ### 2. Player Movement
 - Player 1 (Left side)
-Go Up: A
-Go Down: W
+    + Go Up: A
+    + Go Down: W
 - Player 2 (Right side)
-Go Up: ↑ (Up Arrow)
-Go Down: ↓ (Down Arrow)
+    + Go Up: ↑ (Up Arrow)
+    + Go Down: ↓ (Down Arrow)
 ## License
 Current assets used:
 - Talia's arts.
