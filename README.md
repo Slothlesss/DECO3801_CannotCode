@@ -38,6 +38,11 @@ Mind Over Matter is a 2D side-scrolling platformer designed to be played using a
 1. abc
 2. bcd
 
+### 4. Start the game
+1. Navigate to `./DECO3801_CannotCode/Asset/Scenes/SampleScene`.
+2. Double-click `SampleScene`.
+3. Click the Play button at the top of the Unity Editor to start the game.
+
 ## 🎮 How To Play
 ### 1. Player Mode Selection
 Players can choose between 1 Player or 2 Player mode using left/right buttons.
