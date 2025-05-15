@@ -12,7 +12,7 @@
 
 ## Getting Started
 ### 1. Setup Unity
-1. The Unity Editor is required. Download it from <a href="https://unity3d.com/get-unity/download">Unity3d.com/get-unity/download</a>.
+1. The Unity Editor is required. Download it from <a href="[https://unity3d.com/get-unity/download](https://unity.com/download)">Unity3d.com/get-unity/download</a>.
 2. Run the downloaded Unity Editor.
 3. Open the Unity Project of `./DECO3801_CannotCode` in Unity Version **2022.3.17f1** or higher.
 
