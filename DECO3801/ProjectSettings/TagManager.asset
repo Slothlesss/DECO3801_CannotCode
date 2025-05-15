@@ -9,6 +9,7 @@ TagManager:
   - Star
   - Coin
   - Bullet
+  - Friendly
   layers:
   - Default
   - TransparentFX
