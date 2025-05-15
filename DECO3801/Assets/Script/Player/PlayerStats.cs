@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class PlayerStats : Singleton<PlayerStats>
 {
@@ -27,14 +26,6 @@ public class PlayerStats : Singleton<PlayerStats>
     /// Float storage of score for casting to an int.
     /// </summary>
     private float scoreFloat;
-
-    private bool gameStarted = false;
-
-    public int players;
-
-    [SerializeField] private GameObject startPanel;
-
-    [SerializeField] private GameObject tutorialPanel;
 
     public int Coins
     {
@@ -75,52 +66,11 @@ public class PlayerStats : Singleton<PlayerStats>
     /// </summary>
     private void Update()
     {
-        if(gameStarted) {
+        if(GameManager.Instance.gameState == GameState.Running) {
             UpdateScore();
         }
     }
 
-    /// <summary>
-    /// Starts game when button is pressed.
-    /// </summary>
-    public void Play() {
-        Time.timeScale = 1f;
-        gameStarted = true;
-        startPanel.SetActive(false);
-    }
-
-    public void OnePlayer() {
-        players = 1;
-        Play();
-    }
-
-    public void TwoPlayers() {
-        players = 2;
-        Play();
-    }
-
-    public void ShowTutorial() {
-        tutorialPanel.SetActive(true);
-    }
-
-    public void CloseTutorial() {
-        tutorialPanel.SetActive(false);
-    }
-
-    /// <summary>
-    /// Replays game when button is pressed.
-    /// </summary>
-    public void Replay() {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    /// <summary>
-    /// Exits game when button is pressed.
-    /// </summary>
-    public void Quit() {
-        Application.Quit();
-    }
 
     private void UpdateScore()
     {

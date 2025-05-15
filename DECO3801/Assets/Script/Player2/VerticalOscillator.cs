@@ -5,31 +5,13 @@ public class VerticalOscillator : MonoBehaviour
     public float speed = 2f;
     public float height = 1f;
 
-    private Vector3 basePos;
-    private bool isReady = false;
-
-    void Start()
-    {
-        basePos = GetRightEdgePosition();
-    }
-
     void Update()
     {
-        // Wait until players == 2 before starting
-        if (!isReady)
+        if (gameObject.activeInHierarchy)
         {
-            if (PlayerStats.Instance != null && PlayerStats.Instance.players == 2)
-            {
-                isReady = true;
-            }
-            else
-            {
-                return; // not ready yet, don't move
-            }
+            Vector3 offset = new Vector3(0, Mathf.Sin(Time.time * speed) * height, 0);
+            transform.position = GetRightEdgePosition() + offset;
         }
-
-        Vector3 offset = new Vector3(0, Mathf.Sin(Time.time * speed) * height, 0);
-        transform.position = GetRightEdgePosition() + offset;
     }
 
     private Vector3 GetRightEdgePosition()

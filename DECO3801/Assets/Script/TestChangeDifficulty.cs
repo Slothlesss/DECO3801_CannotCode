@@ -10,7 +10,18 @@ public class TestChangeDifficulty : MonoBehaviour
 
     void Start()
     {
-        hardToggle.isOn = true;
+        switch (GameManager.Instance.difficulty)
+        {
+            case Difficulty.Easy:
+                easyToggle.isOn = true;
+                break;
+            case Difficulty.Medium:
+                mediumToggle.isOn = true;
+                break;
+            case Difficulty.Hard:
+                hardToggle.isOn = true;
+                break;
+        }
         easyToggle.onValueChanged.AddListener(isOn =>
         {
             if (isOn) GameManager.Instance.SetDifficulty(Difficulty.Easy);

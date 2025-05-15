@@ -133,6 +133,7 @@ public class PlayerCollision : MonoBehaviour
         gameOverCoinsUI.text = coins.ToString();
         
         gameOverPanel.SetActive(true);
+        GameManager.Instance.gameState = GameState.Paused;
         Time.timeScale = 0f;       
     }
 }
