@@ -35,13 +35,14 @@ Mind Over Matter is a 2D side-scrolling platformer designed to be played using a
 5. Wait for the message indicating "Server listening on port ...".
 
 ### 3. Setup Headset
-
+1. abc
+2. bcd
 
 ## 🎮 How To Play
 ### 1. Player Mode Selection
 Players can choose between 1 Player or 2 Player mode using left/right buttons.
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/efc91298-da52-4af3-8be7-9e4a2993b713" />
+  <img src="https://github.com/user-attachments/assets/efc91298-da52-4af3-8be7-9e4a2993b713" width="300"/>
 </p>
 
 ### 2. Player Movement
