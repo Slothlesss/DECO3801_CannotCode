@@ -24,10 +24,12 @@ Mind Over Matter is a 2D side-scrolling platformer designed to be played using a
 ### 2. Run server.py file
 1. Navigate to `./DECO3801_CannotCode/Asset/Scripts/server.py`.
 2. Open the file using Visual Studio Code (or any Python-supporting IDE).
-3. In the terminal, run: 
-   ```js
+3. In the terminal, run:
+
+   ```
    python server.py
    ```
+   
 5. Wait for the message indicating "Server listening on port ...".
 
 ### 3. Setup Headset
