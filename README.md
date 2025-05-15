@@ -25,8 +25,9 @@ Mind Over Matter is a brain-computer interaction (BCI) powered 2D side scroller 
 git clone https://github.com/Slothlesss/DECO3801_CannotCode
 ```
 3. Open Unity Editor.
-4. Click Add -> Add project from disk, and navigate to the cloned project folder.
-5. Select the project `./DECO3801_CannotCode/DECO3801` and open it using Unity version 2022.3.17f1 or higher.
+4. Click Add -> Add project from disk
+5. Navigate to the cloned project folder.
+6. Select the project `./DECO3801_CannotCode/DECO3801` and open it using Unity version 2022.3.17f1 or higher.
 ![image](https://github.com/user-attachments/assets/3ac798d2-8da6-4476-bb60-f7be6ddbb0f7)
 
 
