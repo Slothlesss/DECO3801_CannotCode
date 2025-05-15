@@ -13,13 +13,12 @@ public struct spawnInterval
 /// Spawner is responsible for spawning various game objects at configured intervals and positions,
 /// with some object-specific behavior (e.g., warnings for asteroids).
 /// </summary>
-public class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour, IDifficultyListener
 {
     [SerializeField] private GameObject[] spawnPrefabs;
 
     private float timer = 0f;
-    public spawnInterval[] spawnIntervals;
-    [SerializeField] private Transform[] spawnPoints; //Later will use random instead of predefined pos
+    [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private GameObject warningPrefab;
 
     private Dictionary<SpawnableObject, GameObject> prefabDictionary;
@@ -27,14 +26,56 @@ public class Spawner : MonoBehaviour
     private Dictionary<SpawnableObject, float> intervalDictionary;
     private Dictionary<SpawnableObject, float> nextSpawnTimes;
 
-    [SerializeField] private Difficulty currentDifficulty;
-
+    private Dictionary<Difficulty, Dictionary<SpawnableObject, float>> difficultyIntervals;
     /// <summary>
     /// Initializes dictionaries for spawning logic.
     /// </summary>
     private void Start()
     {
+        InitializeDifficultyIntervals();
+        InitializePrefabDictionary();
+        intervalDictionary = new Dictionary<SpawnableObject, float>();
+        nextSpawnTimes = new Dictionary<SpawnableObject, float>();
+        foreach (var kvp in difficultyIntervals[GameManager.Instance.difficulty])
+        {
+            nextSpawnTimes[kvp.Key] = kvp.Value;
+        }
+
+        GameManager.Instance.RegisterListener(this);
+    }
+
+    private void InitializeDifficultyIntervals()
+    {
+        difficultyIntervals = new Dictionary<Difficulty, Dictionary<SpawnableObject, float>>
+        {
+            [Difficulty.Easy] = new Dictionary<SpawnableObject, float>
+        {
+            { SpawnableObject.Asteroid, 3f },
+            { SpawnableObject.Planet, 5f },
+            { SpawnableObject.AsteroidBelt, 3f },
+            { SpawnableObject.Coin, 4f }
+        },
+            [Difficulty.Medium] = new Dictionary<SpawnableObject, float>
+        {
+            { SpawnableObject.Asteroid, 2f },
+            { SpawnableObject.Planet, 5f },
+            { SpawnableObject.AsteroidBelt, 3f },
+            { SpawnableObject.Coin, 4f }
+        },
+            [Difficulty.Hard] = new Dictionary<SpawnableObject, float>
+        {
+            { SpawnableObject.Asteroid, 0.5f },
+            { SpawnableObject.Planet, 5f },
+            { SpawnableObject.AsteroidBelt, 2f },
+            { SpawnableObject.Coin, 4f }
+        }
+        };
+    }
+
+    private void InitializePrefabDictionary()
+    {
         // Initialize the spawnable object dictionary
+        // => make the code more understandable. For example prefabDictionary[SpawnableObject.Asteroid] instead of spawnPrefab[0].
         prefabDictionary = new Dictionary<SpawnableObject, GameObject>
         {
             { SpawnableObject.Asteroid, spawnPrefabs[0] },
@@ -43,19 +84,15 @@ public class Spawner : MonoBehaviour
             { SpawnableObject.Coin, spawnPrefabs[3] }
         };
 
+    }
 
-        // Initialize the interval dictionary
-        intervalDictionary = new Dictionary<SpawnableObject, float>();
-        foreach (var spawnInterval in spawnIntervals)
-        {
-            intervalDictionary[spawnInterval.obj] = spawnInterval.interval;
-        }
+    public void OnDifficultyChanged(Difficulty newDifficulty)
+    {
+        if (!difficultyIntervals.ContainsKey(newDifficulty)) return;
 
-        // Initialize the nextSpawnTimes dictionary
-        nextSpawnTimes = new Dictionary<SpawnableObject, float>();
-        foreach (var spawnInterval in spawnIntervals)
+        foreach (var kvp in difficultyIntervals[newDifficulty])
         {
-            nextSpawnTimes[spawnInterval.obj] = spawnInterval.interval;
+            intervalDictionary[kvp.Key] = kvp.Value;
         }
     }
 
@@ -174,32 +211,5 @@ public class Spawner : MonoBehaviour
         Vector2 ranDir = new Vector2(ranX, ranY);
         Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Asteroid], spawnPosition, Quaternion.identity).GetComponent<Obstacle>();
         obstacle.Initialize(ranDir);
-    }
-
-    public void SetDifficulty(Difficulty difficulty)
-    {
-        switch (difficulty)
-        {
-            case Difficulty.Easy:
-                foreach (var spawnInterval in spawnIntervals)
-                {
-                    intervalDictionary[spawnInterval.obj] = spawnInterval.interval / 2;
-                }
-                break;
-
-            case Difficulty.Medium:
-                foreach (var spawnInterval in spawnIntervals)
-                {
-                    intervalDictionary[spawnInterval.obj] = spawnInterval.interval / 5;
-                }
-                break;
-
-            case Difficulty.Hard:
-                foreach (var spawnInterval in spawnIntervals)
-                {
-                    intervalDictionary[spawnInterval.obj] = spawnInterval.interval / 10;
-                }
-                break;
-        }
     }
 }
