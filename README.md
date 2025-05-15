@@ -21,7 +21,9 @@ Mind Over Matter is a brain-computer interaction (BCI) powered 2D side scroller 
 ### 1. Setup Unity
 1. The Unity Editor is required. Download it from <a href="https://unity.com/download">Unity3d.com/get-unity/download</a>.
 2. Run the downloaded Unity Editor.
-3. Open the Unity Project of `./DECO3801_CannotCode` in Unity Version **2022.3.17f1** or higher.
+![image](https://github.com/user-attachments/assets/3ac798d2-8da6-4476-bb60-f7be6ddbb0f7)
+
+4. Open the Unity Project of `./DECO3801_CannotCode` in Unity Version **2022.3.17f1** or higher.
 
 ### 2. Run server.py file
 1. Navigate to `./DECO3801_CannotCode/Asset/Scripts/server.py`.
