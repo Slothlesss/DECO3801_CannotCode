@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private float[] positionsY = { -3f, -1f, 1f, 3f, 5f }; // Allowed Y positions
     private int currentPositionIndex = 1; // Start at positionY[1]
-    private float moveDuration = 0.15f; // Duration of movement
+    private float moveDuration = 0.1f; // Duration of movement
     bool isMoving = false;
     private int heldDirection = 0; // 1 for W, -1 for S, 0 for none
 
@@ -65,7 +65,6 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(MovePlayer(heldDirection));
         }
     }
-
     /// <summary>
     /// Smoothly moves the player up or down between predefined Y positions.
     /// </summary>
