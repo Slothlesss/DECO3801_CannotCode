@@ -1,4 +1,5 @@
 # DECO3801_CannotCode
+![image](https://github.com/user-attachments/assets/d3fee8bb-6340-4fee-b9f2-c201fcfd1047)
 
 ## Welcome to "Mind Over Matter"
 Description here.
