@@ -32,7 +32,14 @@ git clone https://github.com/Slothlesss/DECO3801_CannotCode
 ![image](https://github.com/user-attachments/assets/3ac798d2-8da6-4476-bb60-f7be6ddbb0f7)
 
 
+
 ### 2. Setup headset
+- Download the Emotiv Launcher from https://www.emotiv.com/pages/download-emotiv-launcher
+- Sign in with EmotivID: cannotcode1 and passsword: Cannotcode11
+- Wear headset by instruction.
+- Click "Connect" until you reach "Close".
+
+### 3. Transmit data to Unity
 - Navigate to `./DECO3801_CannotCode/Asset/EEG/server.py`.
 - Open the file using Visual Studio Code (or any Python-supporting IDE).
 - Right-click the file tab → select "Reveal in File Explorer" (Windows) or "Reveal in Finder" (Mac).
@@ -44,8 +51,9 @@ git clone https://github.com/Slothlesss/DECO3801_CannotCode
    cd "D:\Project\GitHub\DECO3801_CannotCode\DECO3801\Assets\EEG
    python server.py
    ```
+- If its the first time connecting, Click "Approve" in Emotiv Launcher.
 
-### 3. Start the game
+### 4. Start the game
 - Navigate to `./DECO3801_CannotCode/Asset/Scenes/SampleScene`.
 - Double-click `SampleScene`.
 - Click the Play button at the top of the Unity Editor to start the game.
@@ -66,7 +74,15 @@ Players can choose between 1 Player or 2 Player mode using left/right buttons.
     + Go Down: ↓ (Down Arrow)
  
 ### 3. Obstacles
-Planet, Asteroid
+- Asteroid
+![image](https://github.com/user-attachments/assets/f5a4b15a-497c-4815-86fc-4ceb375ab432)
+
+- Asteroid Group
+![image](https://github.com/user-attachments/assets/40e879d2-2a21-48f3-8b6a-37c63741df2a)
+
+- Planet
+![image](https://github.com/user-attachments/assets/607e186c-6a0e-42fe-a651-6be9e372abc1)
+
   
 ## License
 Current assets used:
