@@ -35,10 +35,13 @@ git clone https://github.com/Slothlesss/DECO3801_CannotCode
 ### 2. Setup headset
 - Navigate to `./DECO3801_CannotCode/Asset/EEG/server.py`.
 - Open the file using Visual Studio Code (or any Python-supporting IDE).
+- Right-click the file tab → select "Reveal in File Explorer" (Windows) or "Reveal in Finder" (Mac).
+- In the File Explorer/Finder window, copy the path.
 - In the terminal, run:
 
    ```
    pip install -r requirements.txt
+   cd "D:\Project\GitHub\DECO3801_CannotCode\DECO3801\Assets\EEG
    python server.py
    ```
 
