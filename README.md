@@ -10,7 +10,8 @@ Mind Over Matter is a brain-computer interaction (BCI) powered 2D side scroller 
 - [Getting Started](#getting-started)
     + [1. Setup Unity](#1-setup-unity)
     + [2. Run server.py file](#2-run-server.py-file)
-    + [3. Setup Headset](#3-setup-headset)
+    + [3. Setup Headset](#3-setup-headset)4. Start the game
+    + [4. Start the game](#4-start-the-game)
 - [How To Play](#how-to-play)
     + [1. Player Mode Selection](#1-player-mode-selection)
     + [2. Player Movement](#2-player-movement)
@@ -39,8 +40,6 @@ git clone https://github.com/Slothlesss/DECO3801_CannotCode
    ```
    python server.py
    ```
-   
-5. Wait for the message indicating "Server listening on port ...".
 
 ### 3. Setup Headset
 - abc
