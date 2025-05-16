@@ -8,7 +8,7 @@ public class EEGReceiver : MonoBehaviour
     TcpClient client;
     NetworkStream stream;
 
-    public void Connect()
+    private void Start()
     {
         client = new TcpClient("127.0.0.1", 12345);
         stream = client.GetStream();
