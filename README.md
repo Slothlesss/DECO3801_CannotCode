@@ -75,14 +75,19 @@ Players can choose between 1 Player or 2 Player mode using left/right buttons.
  
 ### 3. Obstacles
 - Asteroid
-![image](https://github.com/user-attachments/assets/f5a4b15a-497c-4815-86fc-4ceb375ab432)
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/f5a4b15a-497c-4815-86fc-4ceb375ab432" width="500"/>
+</p>
 
 - Asteroid Group
-![image](https://github.com/user-attachments/assets/40e879d2-2a21-48f3-8b6a-37c63741df2a)
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/40e879d2-2a21-48f3-8b6a-37c63741df2a" width="500"/>
+</p>
 
 - Planet
-![image](https://github.com/user-attachments/assets/607e186c-6a0e-42fe-a651-6be9e372abc1)
-
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/607e186c-6a0e-42fe-a651-6be9e372abc1" width="500"/>
+</p>
   
 ## License
 Current assets used:
