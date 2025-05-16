@@ -64,6 +64,10 @@ Players can choose between 1 Player or 2 Player mode using left/right buttons.
 - Player 2 (Right side)
     + Go Up: ↑ (Up Arrow)
     + Go Down: ↓ (Down Arrow)
+ 
+### 3. Obstacles
+Planet, Asteroid
+  
 ## License
 Current assets used:
 - Talia's arts.
