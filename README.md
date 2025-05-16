@@ -32,20 +32,17 @@ git clone https://github.com/Slothlesss/DECO3801_CannotCode
 ![image](https://github.com/user-attachments/assets/3ac798d2-8da6-4476-bb60-f7be6ddbb0f7)
 
 
-### 2. Run server.py file
-- Navigate to `./DECO3801_CannotCode/Asset/Scripts/server.py`.
+### 2. Setup headset
+- Navigate to `./DECO3801_CannotCode/Asset/EEG/server.py`.
 - Open the file using Visual Studio Code (or any Python-supporting IDE).
 - In the terminal, run:
 
    ```
+   pip install -r requirements.txt
    python server.py
    ```
 
-### 3. Setup Headset
-- abc
-- bcd
-
-### 4. Start the game
+### 3. Start the game
 - Navigate to `./DECO3801_CannotCode/Asset/Scenes/SampleScene`.
 - Double-click `SampleScene`.
 - Click the Play button at the top of the Unity Editor to start the game.
