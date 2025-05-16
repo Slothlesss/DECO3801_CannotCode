@@ -91,7 +91,16 @@ Players can choose between 1 Player or 2 Player mode using left/right buttons.
 <p>
     <img src="https://github.com/user-attachments/assets/607e186c-6a0e-42fe-a651-6be9e372abc1" width="300"/>
 </p>
-  
+
+### 4. Adaptive Gameplay
+<p>
+  <img src="https://github.com/user-attachments/assets/5884ad61-f67f-4583-b8ed-58e8ce794e82" width="500"/>
+</p>
+The headset will detect your level of frustration, fatigue and focus:
+- Frustration: Increases game difficulty. The more frustrated you are, the harder the game becomes => so try to stay calm.
+- Fatigue: Triggers additional obstacles. Higher fatigue levels introduce more challenges in the environment.
+- Focus: Unlocks and strengthens your weapon. The more focused you are, the more powerful your weapon becomes.
+
 ## License
 Current assets used:
 - Talia's arts.
