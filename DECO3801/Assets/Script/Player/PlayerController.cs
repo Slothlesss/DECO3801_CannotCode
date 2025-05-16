@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float reloadTime = 0.5f;
     private float timer = 0f;
     private bool canFire = true;
+    [Header("Charged Shot")]
+    [SerializeField] private GameObject chargedProjectilePrefab;
+    [SerializeField] private float chargeTime = 1.0f; // Time to hold before charged shot
+    private bool isCharging = false;
+    private float chargeTimer = 0f;
 
     private float[] positionsY = { -3f, -1f, 1f, 3f, 5f }; // Allowed Y positions
     private int currentPositionIndex = 1; // Start at positionY[1]
@@ -117,24 +122,77 @@ public class PlayerController : MonoBehaviour
     {
         timer += Time.deltaTime;
         reloadSlider.value = timer;
-        if (timer > reloadTime)
+
+        if (timer < reloadTime)
+            return;
+
+        // Start charging when Space is held
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            canFire = true;
+            isCharging = true;
+            chargeTimer = 0f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && canFire)
+        // Continue charging
+        if (Input.GetKey(KeyCode.Space) && isCharging)
         {
+            chargeTimer += Time.deltaTime;
+        }
+
+        // Fire based on duration when key is released
+        if (Input.GetKeyUp(KeyCode.Space) && isCharging)
+        {
+            if (chargeTimer >= chargeTime)
+            {
+                FireChargedProjectile();
+            }
+            else
+            {
+                FireProjectile();
+            }
+
+            isCharging = false;
             canFire = false;
-            FireProjectile();
             timer = 0f;
         }
     }
-
     /// <summary>
-    /// Instantiates a projectile at the fire point.
+    /// Instantiates a standard projectile at the fire point.
     /// </summary>
     private void FireProjectile()
     {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-    } 
+    }
+
+    /// <summary>
+    /// Instantiates a charged projectile at the fire point.
+    /// </summary>
+    private void FireChargedProjectile()
+    {
+        GameObject chargedShot = Instantiate(chargedProjectilePrefab, firePoint.position, Quaternion.identity);
+    }
+    //private void HandleShooting()
+    //{
+    //    timer += Time.deltaTime;
+    //    reloadSlider.value = timer;
+    //    if (timer > reloadTime)
+    //    {
+    //        canFire = true;
+    //    }
+
+    //    if (Input.GetKeyDown(KeyCode.Space) && canFire)
+    //    {
+    //        canFire = false;
+    //        FireProjectile();
+    //        timer = 0f;
+    //    }
+    //}
+
+    ///// <summary>
+    ///// Instantiates a projectile at the fire point.
+    ///// </summary>
+    //private void FireProjectile()
+    //{
+    //    GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+    //} 
 }
