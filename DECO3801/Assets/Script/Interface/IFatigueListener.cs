@@ -1,4 +1,4 @@
 public interface IFatigueListener
 {
-    void OnFatigiueChanged(Fatigue newFatigue);
+    void OnFatigueChanged(Fatigue newFatigue);
 }

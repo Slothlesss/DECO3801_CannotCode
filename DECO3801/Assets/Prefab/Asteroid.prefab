@@ -5107,6 +5107,9 @@ MonoBehaviour:
   lifetime: 7
   rotationSpeed: 100
   effect: {fileID: 8694493143352496696}
+  sprites:
+  - {fileID: 21300000, guid: 0b00358a280b8a24fb44813a8b6803b3, type: 3}
+  - {fileID: 21300000, guid: 47a195a0f7d910a439b6167f46a89aae, type: 3}
 --- !u!61 &6418167886104099846
 BoxCollider2D:
   m_ObjectHideFlags: 0

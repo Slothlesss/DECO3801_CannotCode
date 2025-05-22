@@ -9,20 +9,24 @@ public class GameManager : Singleton<GameManager>
     public int numPlayers;
        
     [HideInInspector]
-    public Frustration frustration = Frustration.Normal;
+    public Frustration frustration;
     [HideInInspector]
-    public Fatigue fatigue = Fatigue.Normal;
+    public Fatigue fatigue;
     [HideInInspector]
-    public Focus focus = Focus.Low;
+    public Focus focus;
 
     private List<IFrustrationListener> frustrationListeners = new List<IFrustrationListener>();
     private List<IFatigueListener> fatigueListeners = new List<IFatigueListener>();
     private List<IFocusListener> focusListeners = new List<IFocusListener>();
 
 
-    private void Start()
+    private void Awake()
     {
         gameState = GameState.Paused;
+
+        frustration = Frustration.Normal;
+        fatigue = Fatigue.Normal;
+        focus = Focus.Low;
 
         SetFrustration(frustration);
         SetFatigue(fatigue);
@@ -40,7 +44,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     // ============ Frustration ============
-    public void RegisterListener(IFrustrationListener listener)
+    public void RegisterFrustrationListener(IFrustrationListener listener)
     {
         if (!frustrationListeners.Contains(listener))
         {
@@ -70,12 +74,12 @@ public class GameManager : Singleton<GameManager>
 
 
     // ============ Fatigue ============
-    public void RegisterListener(IFatigueListener listener)
+    public void RegisterFatigueListener(IFatigueListener listener)
     {
         if (!fatigueListeners.Contains(listener))
         {
             fatigueListeners.Add(listener);
-            listener.OnFatigiueChanged(fatigue);
+            listener.OnFatigueChanged(fatigue);
         }
     }
 
@@ -92,7 +96,7 @@ public class GameManager : Singleton<GameManager>
 
         foreach (var listener in fatigueListeners)
         {
-            listener.OnFatigiueChanged(newFatigue);
+            listener.OnFatigueChanged(newFatigue);
         }
     }
 
@@ -100,7 +104,7 @@ public class GameManager : Singleton<GameManager>
 
 
     // ============ Focus ============
-    public void RegisterListener(IFocusListener listener)
+    public void RegisterFocusListener(IFocusListener listener)
     {
         if (!focusListeners.Contains(listener))
         {

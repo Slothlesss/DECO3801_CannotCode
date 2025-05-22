@@ -63,9 +63,12 @@ public class PlayerCollision : MonoBehaviour
             StartCoroutine(CollectCoin(other.gameObject));
             PlayerStats.Instance.Coins++;
         }
-        if (other.CompareTag("Enemy") && canLoseHealth)
+        if (other.CompareTag("Enemy") || other.CompareTag("Planet") || other.CompareTag("AsteroidBelt"))
         {
-            LoseHealth();
+            if (canLoseHealth)
+            {
+                LoseHealth();
+            }
         }
     }
 
