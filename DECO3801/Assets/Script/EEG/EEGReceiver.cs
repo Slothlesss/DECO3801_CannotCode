@@ -24,7 +24,7 @@ public class EEGReceiver : MonoBehaviour
     private float fatigueTimer;
     private float focusTimer;
 
-    private const float lockDuration = 5f;
+    private const float lockDuration = 7f;
 
     private void Start()
     {

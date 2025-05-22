@@ -19,6 +19,10 @@ public class GameManager : Singleton<GameManager>
     private List<IFatigueListener> fatigueListeners = new List<IFatigueListener>();
     private List<IFocusListener> focusListeners = new List<IFocusListener>();
 
+    [Header("Random Mode")]
+    [SerializeField] private bool randomMode;
+    [SerializeField] private float interval;
+    private float timer;
 
     private void Awake()
     {
@@ -32,6 +36,30 @@ public class GameManager : Singleton<GameManager>
         SetFatigue(fatigue);
         SetFocus(focus);
     }
+
+    private void Update()
+    {
+        if (!randomMode) return;
+        timer += Time.deltaTime;
+        if (timer >= interval)
+        {
+            timer = 0f;
+            AssignRandomLevels();
+        }
+    }
+    private void AssignRandomLevels()
+    {
+        Frustration newFrustration = (Frustration)Random.Range(0, 4);
+        Fatigue newFatigue = (Fatigue)Random.Range(0, 4);
+        Focus newFocus = (Focus)Random.Range(0, 4);
+
+        SetFrustration(newFrustration);
+        SetFatigue(newFatigue);
+        SetFocus(newFocus);
+
+        Debug.Log($"[Random EEG] Frustration: {(int)newFrustration}, Fatigue: {(int)newFatigue}, Focus: {(int)newFocus}");
+    }
+
 
     /// <summary>
     /// Replays game when button is pressed.

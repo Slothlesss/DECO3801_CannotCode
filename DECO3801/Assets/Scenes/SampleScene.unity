@@ -2657,6 +2657,8 @@ MonoBehaviour:
   frustration: 0
   fatigue: 0
   focus: 0
+  randomMode: 1
+  interval: 7
 --- !u!4 &333976551
 Transform:
   m_ObjectHideFlags: 0
