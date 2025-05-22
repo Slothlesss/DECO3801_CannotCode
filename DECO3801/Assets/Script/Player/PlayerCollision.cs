@@ -77,16 +77,16 @@ public class PlayerCollision : MonoBehaviour
         StartCoroutine(HitCollision());
         if (health == 3)
         {
-            hearts[2].GetComponent<Image>().color = Color.grey;
+            hearts[2].GetComponent<Image>().color = Color.black;
         }
         else if (health == 2)
         {
-            hearts[1].GetComponent<Image>().color = Color.grey;
+            hearts[1].GetComponent<Image>().color = Color.black;
         }
         else if (health == 1)
         {
             // If player has last all 3 hearts, game is over.
-            hearts[0].GetComponent<Image>().color = Color.grey;
+            hearts[0].GetComponent<Image>().color = Color.black;
             GameOver();
         }
         Debug.Log("Lose Heath");

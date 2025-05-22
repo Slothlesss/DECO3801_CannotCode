@@ -155,7 +155,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0b00358a280b8a24fb44813a8b6803b3, type: 3}
   m_Color: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 1}
   m_FlipX: 0
@@ -5068,7 +5068,7 @@ GameObject:
   - component: {fileID: 6418167886104099846}
   - component: {fileID: 3723541491802894901}
   m_Layer: 0
-  m_Name: AsteroidPrefab
+  m_Name: Asteroid
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -2,76 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct spawnInterval
-{
-    public SpawnableObject obj;
-    public float interval;
-}
-
 /// <summary>
 /// Spawner is responsible for spawning various game objects at configured intervals and positions,
 /// with some object-specific behavior (e.g., warnings for asteroids).
 /// </summary>
-public class Spawner : MonoBehaviour, IDifficultyListener
+public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] spawnPrefabs;
 
     private float timer = 0f;
-    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private Transform[] asteroidSpawnPos;
+    [SerializeField] private Transform[] planetSpawnPos;
+    [SerializeField] private Transform[] asteroidClusterSpawnPos;
+    [SerializeField] private Transform[] asteroidBeltPos;
+    [SerializeField] private Transform[] coinPos;
     [SerializeField] private GameObject warningPrefab;
 
     private Dictionary<SpawnableObject, GameObject> prefabDictionary;
-
-    private Dictionary<SpawnableObject, float> intervalDictionary;
     private Dictionary<SpawnableObject, float> nextSpawnTimes;
 
-    private Dictionary<Difficulty, Dictionary<SpawnableObject, float>> difficultyIntervals;
+    private Dictionary<Frustration, Dictionary<SpawnableObject, bool>> frustrationConfigs;
+    private Dictionary<Fatigue, Dictionary<SpawnableObject, float>> fatigueConfigs;
+    private Dictionary<Focus, Dictionary<SpawnableObject, float>> focusConfigs;
     /// <summary>
     /// Initializes dictionaries for spawning logic.
     /// </summary>
     private void Start()
     {
-        InitializeDifficultyIntervals();
+        InitializeFrustrationConfigs();
+        InitializeFatigueConfigs();
+        InitializeFocusConfigs();
+
         InitializePrefabDictionary();
-        intervalDictionary = new Dictionary<SpawnableObject, float>();
-        nextSpawnTimes = new Dictionary<SpawnableObject, float>();
-        foreach (var kvp in difficultyIntervals[GameManager.Instance.difficulty])
-        {
-            nextSpawnTimes[kvp.Key] = kvp.Value;
-        }
-
-        GameManager.Instance.RegisterListener(this);
+        InitializeNextSpawnTimes();
     }
-
-    private void InitializeDifficultyIntervals()
-    {
-        difficultyIntervals = new Dictionary<Difficulty, Dictionary<SpawnableObject, float>>
-        {
-            [Difficulty.Easy] = new Dictionary<SpawnableObject, float>
-        {
-            { SpawnableObject.Asteroid, 3f },
-            { SpawnableObject.Planet, 5f },
-            { SpawnableObject.AsteroidBelt, 3f },
-            { SpawnableObject.Coin, 4f }
-        },
-            [Difficulty.Medium] = new Dictionary<SpawnableObject, float>
-        {
-            { SpawnableObject.Asteroid, 2f },
-            { SpawnableObject.Planet, 5f },
-            { SpawnableObject.AsteroidBelt, 3f },
-            { SpawnableObject.Coin, 4f }
-        },
-            [Difficulty.Hard] = new Dictionary<SpawnableObject, float>
-        {
-            { SpawnableObject.Asteroid, 0.5f },
-            { SpawnableObject.Planet, 5f },
-            { SpawnableObject.AsteroidBelt, 2f },
-            { SpawnableObject.Coin, 4f }
-        }
-        };
-    }
-
     private void InitializePrefabDictionary()
     {
         // Initialize the spawnable object dictionary
@@ -80,21 +44,120 @@ public class Spawner : MonoBehaviour, IDifficultyListener
         {
             { SpawnableObject.Asteroid, spawnPrefabs[0] },
             { SpawnableObject.Planet, spawnPrefabs[1] },
-            { SpawnableObject.AsteroidBelt, spawnPrefabs[2] },
-            { SpawnableObject.Coin, spawnPrefabs[3] }
+            { SpawnableObject.AsteroidCluster, spawnPrefabs[2] },
+            { SpawnableObject.AsteroidBelt, spawnPrefabs[3] },
+            { SpawnableObject.Coin, spawnPrefabs[4] }
         };
-
     }
 
-    public void OnDifficultyChanged(Difficulty newDifficulty)
+    private void InitializeNextSpawnTimes()
     {
-        if (!difficultyIntervals.ContainsKey(newDifficulty)) return;
-
-        foreach (var kvp in difficultyIntervals[newDifficulty])
+        nextSpawnTimes = new Dictionary<SpawnableObject, float>();
+        foreach (var kvp in fatigueConfigs[GameManager.Instance.fatigue])
         {
-            intervalDictionary[kvp.Key] = kvp.Value;
+            nextSpawnTimes[kvp.Key] = kvp.Value;
         }
+
+        foreach (var kvp in focusConfigs[GameManager.Instance.focus])
+        {
+            nextSpawnTimes[kvp.Key] = kvp.Value;
+        }
+
     }
+
+    private void InitializeFrustrationConfigs()
+    {
+        frustrationConfigs = new Dictionary<Frustration, Dictionary<SpawnableObject, bool>>
+        {
+            [Frustration.Normal] = new Dictionary<SpawnableObject, bool>
+        {
+            { SpawnableObject.Asteroid, true},
+            { SpawnableObject.Planet, false},
+            { SpawnableObject.AsteroidCluster, false},
+            { SpawnableObject.AsteroidBelt, false}
+        },
+            [Frustration.Mild] = new Dictionary<SpawnableObject, bool> 
+        {
+            { SpawnableObject.Asteroid, true},
+            { SpawnableObject.Planet, true},
+            { SpawnableObject.AsteroidCluster, false},
+            { SpawnableObject.AsteroidBelt, false}
+        },
+            [Frustration.Moderate] = new Dictionary<SpawnableObject, bool>
+        {
+            { SpawnableObject.Asteroid, true},
+            { SpawnableObject.Planet, true},
+            { SpawnableObject.AsteroidCluster, true},
+            { SpawnableObject.AsteroidBelt, false}
+        },
+            [Frustration.High] = new Dictionary<SpawnableObject, bool> {
+            { SpawnableObject.Asteroid, true},
+            { SpawnableObject.Planet, true},
+            { SpawnableObject.AsteroidCluster, true},
+            { SpawnableObject.AsteroidBelt, true},
+        }
+        };
+    }
+
+    private void InitializeFatigueConfigs()
+    {
+        fatigueConfigs = new Dictionary<Fatigue, Dictionary<SpawnableObject, float>>
+        {
+            [Fatigue.Normal] = new Dictionary<SpawnableObject, float>
+        {
+            { SpawnableObject.Asteroid, 3f },
+            { SpawnableObject.Planet, 7f },
+            { SpawnableObject.AsteroidCluster, 3f},
+            { SpawnableObject.AsteroidBelt, 5f }
+        },
+            [Fatigue.Mild] = new Dictionary<SpawnableObject, float>
+        {
+            { SpawnableObject.Asteroid, 2f },
+            { SpawnableObject.Planet, 7f },
+            { SpawnableObject.AsteroidCluster, 3f},
+            { SpawnableObject.AsteroidBelt, 5f }
+        },
+            [Fatigue.Moderate] = new Dictionary<SpawnableObject, float>
+        {
+            { SpawnableObject.Asteroid, 1f },
+            { SpawnableObject.Planet, 7f },
+            { SpawnableObject.AsteroidCluster, 3f},
+            { SpawnableObject.AsteroidBelt, 5f }
+        },
+            [Fatigue.High] = new Dictionary<SpawnableObject, float>
+        {
+            { SpawnableObject.Asteroid, 0.5f },
+            { SpawnableObject.Planet, 7f },
+            { SpawnableObject.AsteroidCluster, 3f},
+            { SpawnableObject.AsteroidBelt, 5f }
+        }
+        };
+    }
+
+    private void InitializeFocusConfigs()
+    {
+        focusConfigs = new Dictionary<Focus, Dictionary<SpawnableObject, float>>
+        {
+            [Focus.Low] = new Dictionary<SpawnableObject, float>
+        {
+            { SpawnableObject.Coin, 4f},
+        },
+            [Focus.Normal] = new Dictionary<SpawnableObject, float>
+        {
+            { SpawnableObject.Coin, 3f},
+        },
+            [Focus.Medium] = new Dictionary<SpawnableObject, float>
+        {
+            { SpawnableObject.Coin, 2f},
+        },
+            [Focus.High] = new Dictionary<SpawnableObject, float> 
+        {
+            { SpawnableObject.Coin, 1f},
+        }
+        };
+    }
+
+
 
     /// <summary>
     /// Handles spawn timing and calls spawn methods as needed.
@@ -103,13 +166,24 @@ public class Spawner : MonoBehaviour, IDifficultyListener
     {
         timer += Time.deltaTime;
 
-        int randomPrefabIndex = Random.Range(0, spawnPrefabs.Length); // Pick a random prefab
+        int randomPrefabIndex = Random.Range(0, spawnPrefabs.Length - 1); // Pick a random prefab except coin
         SpawnableObject spawnType = (SpawnableObject)randomPrefabIndex;
 
         if (timer >= nextSpawnTimes[spawnType])
         {
-            Spawn(spawnType);
-            nextSpawnTimes[spawnType] = timer + intervalDictionary[spawnType];
+            //Check frustration config
+            if (frustrationConfigs[GameManager.Instance.frustration][spawnType])
+            {
+                Spawn(spawnType);
+                //Check fatigue config
+                nextSpawnTimes[spawnType] = timer + fatigueConfigs[GameManager.Instance.fatigue][spawnType];
+            }
+        }
+        else if (timer >= nextSpawnTimes[SpawnableObject.Coin])
+        {
+            Spawn(SpawnableObject.Coin);
+            //Check focus config
+            nextSpawnTimes[SpawnableObject.Coin] = timer + focusConfigs[GameManager.Instance.focus][SpawnableObject.Coin];
         }
     }
 
@@ -119,14 +193,16 @@ public class Spawner : MonoBehaviour, IDifficultyListener
     /// <param name="spawnType">The type of object to spawn.</param>
     private void Spawn(SpawnableObject spawnType)
     {
-        int randomSpawnIndex = Random.Range(0, spawnPoints.Length); // Pick a random spawn location
         switch (spawnType)
         {
             case SpawnableObject.Asteroid:
-                SpawnAsteroid(randomSpawnIndex);
+                SpawnAsteroid();
                 break;
             case SpawnableObject.Planet:
                 SpawnPlanet();
+                break;
+            case SpawnableObject.AsteroidCluster:
+                SpawnAsteroidCluster();
                 break;
             case SpawnableObject.AsteroidBelt:
                 SpawnAsteroidBelt();
@@ -140,9 +216,20 @@ public class Spawner : MonoBehaviour, IDifficultyListener
     /// <summary>
     /// Triggers coroutine to spawn an asteroid with a warning.
     /// </summary>
-    private void SpawnAsteroid(int posIdx)
+    private void SpawnAsteroid()
     {
-        StartCoroutine(SpawnAsteroidWithWarning(posIdx));
+        int randomPosIndex = Random.Range(0, asteroidSpawnPos.Length); // Pick a random spawn location
+        Vector2 spawnPosition = asteroidSpawnPos[randomPosIndex].position + new Vector3(0, 0, 0);
+
+        int ranX = Random.Range(-2, -1);
+        int ranY = asteroidSpawnPos[randomPosIndex].position.y <= 0 ? Random.Range(0, 3) : Random.Range(-3, 0);
+        Vector2 ranDir = new Vector2(ranX, ranY) ;
+        Obstacle obstacle = Instantiate(
+            prefabDictionary[SpawnableObject.Asteroid],
+            spawnPosition,
+            Quaternion.identity
+        ).GetComponent<Obstacle>();
+        obstacle.Initialize(ranDir);
     }
 
     /// <summary>
@@ -150,21 +237,33 @@ public class Spawner : MonoBehaviour, IDifficultyListener
     /// </summary>
     private void SpawnPlanet()
     {
-        int randomPosIndex = (Random.Range(0, 2) == 0) ? 0 : 2;
-        Vector2 spawnPos = spawnPoints[randomPosIndex].position + new Vector3(30, 0, 0);
+        int randomPosIndex = Random.Range(0, planetSpawnPos.Length);
+        Vector2 spawnPos = planetSpawnPos[randomPosIndex].position + new Vector3(30, 0, 0);
         Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Planet], spawnPos, Quaternion.identity).GetComponent<Obstacle>();
         obstacle.Initialize(new Vector2(0, 0));
     }
+
+    /// <summary>
+    /// Spawns a static asteroid cluster at a random position.
+    /// </summary>
+    private void SpawnAsteroidCluster()
+    {
+        int randomPosIndex = Random.Range(0, asteroidClusterSpawnPos.Length);
+        Vector2 spawnPos = asteroidClusterSpawnPos[randomPosIndex].position + new Vector3(30, 0, 0);
+        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.AsteroidCluster], spawnPos, Quaternion.identity).GetComponent<Obstacle>();
+        obstacle.Initialize(new Vector2(0, 0));
+    }
+
 
     /// <summary>
     /// Spawns a static asteroid belt at a random position.
     /// </summary>
     private void SpawnAsteroidBelt()
     {
-        int randomPosIndex = Random.Range(0, 2);
-        Vector2 spawnPos = spawnPoints[randomPosIndex].position + new Vector3(30, 0, 0);
+        int randomPosIndex = Random.Range(0, asteroidBeltPos.Length);
+        Vector2 spawnPos = asteroidBeltPos[randomPosIndex].position + new Vector3(30, 0, 0);
         Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.AsteroidBelt], spawnPos, Quaternion.identity).GetComponent<Obstacle>();
-        obstacle.Initialize(new Vector2(0, 0)); //Not moving
+        obstacle.Initialize(new Vector2(0, 0));
     }
 
     /// <summary>
@@ -172,44 +271,10 @@ public class Spawner : MonoBehaviour, IDifficultyListener
     /// </summary>
     private void SpawnCoin()
     {
-        int randomPosIndex = Random.Range(0, 2);
-        Vector2 spawnPos = spawnPoints[randomPosIndex].position + new Vector3(10, 0, 0);
+        int randomPosIndex = Random.Range(0, coinPos.Length);
+        Vector2 spawnPos = coinPos[randomPosIndex].position + new Vector3(10, 0, 0);
         Collectable collectable = Instantiate(prefabDictionary[SpawnableObject.Coin], spawnPos, Quaternion.identity).GetComponentInChildren<Collectable>();
         collectable.Initialize(new Vector2(0, 0));
     }
 
-    /// <summary>
-    /// Spawns an asteroid after a warning icon flashes. Asteroids are given a randomized movement vector.
-    /// </summary>
-    /// <param name="spawnIdx">Index of the spawn point to use.</param>
-    private IEnumerator SpawnAsteroidWithWarning(int spawnIdx) //Later asteroid won't have warnings, rockets will have
-    {
-        //Spawn Warning
-        Vector3 spawnPosition = spawnPoints[spawnIdx].position;
-        GameObject warning = Instantiate(warningPrefab, spawnPosition, Quaternion.identity);
-        warning.transform.SetParent(spawnPoints[spawnIdx]);
-
-        // Flash the warning 3 times
-        SpriteRenderer warningRenderer = warning.GetComponent<SpriteRenderer>();
-        Color color = warningRenderer.color;
-        for (int i = 0; i < 3; i++)
-        {
-            yield return new WaitForSeconds(0.1f); 
-            color.a = 0f;
-            warningRenderer.color = color;
-            yield return new WaitForSeconds(0.1f); 
-            color.a = 1f;
-            warningRenderer.color = color;
-        }
-        Destroy(warning);
-        yield return new WaitForSeconds(0.5f);
-
-        //Spawn Asteroid
-        spawnPosition = spawnPoints[spawnIdx].position;
-        int ranX = Random.Range(-2, -1);
-        int ranY = spawnPoints[spawnIdx].position.y <= 0 ? Random.Range(0, 3) : Random.Range(-3, 0);
-        Vector2 ranDir = new Vector2(ranX, ranY);
-        Obstacle obstacle = Instantiate(prefabDictionary[SpawnableObject.Asteroid], spawnPosition, Quaternion.identity).GetComponent<Obstacle>();
-        obstacle.Initialize(ranDir);
-    }
 }

@@ -29,9 +29,9 @@ public class Projectile : MonoBehaviour
     /// <param name="other">The collider the projectile has hit.</param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") || other.CompareTag("AsteroidBelt"))
         {
             Destroy(gameObject);
-        }
+        } 
     }
 }

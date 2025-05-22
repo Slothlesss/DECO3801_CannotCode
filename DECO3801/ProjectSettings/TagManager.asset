@@ -10,6 +10,8 @@ TagManager:
   - Coin
   - Bullet
   - Friendly
+  - AsteroidBelt
+  - ChargedBullet
   layers:
   - Default
   - TransparentFX
