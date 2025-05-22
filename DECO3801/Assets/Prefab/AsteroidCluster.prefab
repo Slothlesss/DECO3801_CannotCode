@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3000095806048553548}
   - component: {fileID: 8115805620002276513}
-  - component: {fileID: 4939557930412062779}
+  - component: {fileID: 9059376684652341913}
   m_Layer: 0
   m_Name: AsteroidCluster
   m_TagString: Enemy
@@ -63,7 +63,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4939557930412062779
+--- !u!114 &9059376684652341913
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4769955918530853184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7208d463c43e334aa83e612ecb87b8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 37cec18458c430a4d856945fe4097f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10

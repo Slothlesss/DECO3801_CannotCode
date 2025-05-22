@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour, IFocusListener
         reloadSlider.maxValue = reloadTime;
         chargeReloadSlider.maxValue = chargeReloadTime;
 
-        GameManager.Instance.RegisterListener(this);
+        GameManager.Instance.RegisterFocusListener(this);
     }
 
     /// <summary>
@@ -137,8 +137,6 @@ public class PlayerController : MonoBehaviour, IFocusListener
         if (normalTimer < reloadTime)
             return;
 
-        Debug.Log(normalShotAvailable);
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             FireNormalProjectile();
@@ -203,7 +201,6 @@ public class PlayerController : MonoBehaviour, IFocusListener
 
     public void OnFocusChanged(Focus newFocus)
     {
-        Debug.Log(newFocus);
         switch (newFocus) {
             case Focus.Low:
                 reloadTime = 3f;
