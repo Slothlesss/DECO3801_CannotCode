@@ -8,11 +8,14 @@ public class GameManager : Singleton<GameManager>
     public GameState gameState;
     public int numPlayers;
        
-    public Difficulty difficulty;
-    public Fatigue fatigue;
-    public Focus focus;
+    [HideInInspector]
+    public Frustration frustration = Frustration.Normal;
+    [HideInInspector]
+    public Fatigue fatigue = Fatigue.Normal;
+    [HideInInspector]
+    public Focus focus = Focus.Low;
 
-    private List<IDifficultyListener> difficultyListeners = new List<IDifficultyListener>();
+    private List<IFrustrationListener> frustrationListeners = new List<IFrustrationListener>();
     private List<IFatigueListener> fatigueListeners = new List<IFatigueListener>();
     private List<IFocusListener> focusListeners = new List<IFocusListener>();
 
@@ -21,7 +24,7 @@ public class GameManager : Singleton<GameManager>
     {
         gameState = GameState.Paused;
 
-        SetDifficulty(difficulty);
+        SetFrustration(frustration);
         SetFatigue(fatigue);
         SetFocus(focus);
     }
@@ -36,34 +39,34 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // ============ Difficulty ============
-    public void RegisterListener(IDifficultyListener listener)
+    // ============ Frustration ============
+    public void RegisterListener(IFrustrationListener listener)
     {
-        if (!difficultyListeners.Contains(listener))
+        if (!frustrationListeners.Contains(listener))
         {
-            difficultyListeners.Add(listener);
-            listener.OnDifficultyChanged(difficulty);
+            frustrationListeners.Add(listener);
+            listener.OnFrustrationChanged(frustration);
         }
     }
 
-    public void UnregisterListener(IDifficultyListener listener)
+    public void UnregisterListener(IFrustrationListener listener)
     {
-        difficultyListeners.Remove(listener);
+        frustrationListeners.Remove(listener);
     }
 
-    public void SetDifficulty(Difficulty newDifficulty)
+    public void SetFrustration(Frustration newFrustration)
     {
-        if (difficulty == newDifficulty) return;
+        if (frustration == newFrustration) return;
 
-        difficulty = newDifficulty;
+        frustration = newFrustration;
 
-        foreach (var listener in difficultyListeners)
+        foreach (var listener in frustrationListeners)
         {
-            listener.OnDifficultyChanged(newDifficulty);
+            listener.OnFrustrationChanged(newFrustration);
         }
     }
 
-    // ============ End - Difficulty ============
+    // ============ End - Frustration ============
 
 
     // ============ Fatigue ============
@@ -135,5 +138,7 @@ public class GameManager : Singleton<GameManager>
     }
 
 }
+
+
 
 

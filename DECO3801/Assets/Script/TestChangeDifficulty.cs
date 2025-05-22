@@ -10,31 +10,31 @@ public class TestChangeDifficulty : MonoBehaviour
 
     void Start()
     {
-        switch (GameManager.Instance.difficulty)
+        switch (GameManager.Instance.frustration)
         {
-            case Difficulty.Easy:
+            case Frustration.Normal:
                 easyToggle.isOn = true;
                 break;
-            case Difficulty.Medium:
+            case Frustration.Mild:
                 mediumToggle.isOn = true;
                 break;
-            case Difficulty.Hard:
+            case Frustration.Moderate:
                 hardToggle.isOn = true;
                 break;
         }
         easyToggle.onValueChanged.AddListener(isOn =>
         {
-            if (isOn) GameManager.Instance.SetDifficulty(Difficulty.Easy);
+            if (isOn) GameManager.Instance.SetFrustration(Frustration.Normal);
         });
 
         mediumToggle.onValueChanged.AddListener(isOn =>
         {
-            if (isOn) GameManager.Instance.SetDifficulty(Difficulty.Medium);
+            if (isOn) GameManager.Instance.SetFrustration(Frustration.Mild);
         });
 
         hardToggle.onValueChanged.AddListener(isOn =>
         {
-            if (isOn) GameManager.Instance.SetDifficulty(Difficulty.Hard);
+            if (isOn) GameManager.Instance.SetFrustration(Frustration.Moderate);
         });
     }
 }

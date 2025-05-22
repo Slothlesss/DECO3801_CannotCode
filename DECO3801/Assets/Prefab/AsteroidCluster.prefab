@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3000095806048553548}
   - component: {fileID: 8115805620002276513}
-  - component: {fileID: 3312545262314982485}
+  - component: {fileID: 4939557930412062779}
   m_Layer: 0
-  m_Name: AsteroidGroup
+  m_Name: AsteroidCluster
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4769955918530853184}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.2, y: -0.2, z: -0.2311684}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -63,7 +63,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3312545262314982485
+--- !u!114 &4939557930412062779
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Controls the player�s movement between fixed vertical lanes and shooting projectiles.
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IFocusListener
 {
     [SerializeField] private float speed;
     private Rigidbody2D rb;
@@ -17,17 +17,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private Slider reloadSlider;
-    [SerializeField] private float reloadTime = 0.5f;
-    private float timer = 0f;
-    private bool canFire = true;
+    [SerializeField] private float reloadTime = 3f;
+    private float normalTimer = 0f;
+    private bool normalShotAvailable = false;
+
     [Header("Charged Shot")]
     [SerializeField] private GameObject chargedProjectilePrefab;
+    [SerializeField] private Slider chargeReloadSlider;
     [SerializeField] private float chargeTime = 1.0f; // Time to hold before charged shot
-    private bool isCharging = false;
+    [SerializeField] private float chargeReloadTime = 7.0f;
     private float chargeTimer = 0f;
+    private float chargeReloadTimer = 0f;
+    private bool chargedShotAvailable = false;
+    private bool isChargeShotCharging = false;
 
+    [Header("Movement")]
     private float[] positionsY = { -3f, -1f, 1f, 3f, 5f }; // Allowed Y positions
-    private int currentPositionIndex = 1; // Start at positionY[1]
+    private int currentPositionIndex = 2; // Start at positionY[2]
     private float moveDuration = 0.2f; // Duration of movement
     bool isMoving = false;
     private int heldDirection = 0; // 1 for W, -1 for S, 0 for none
@@ -38,9 +44,12 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        reloadSlider.value = timer;
+        reloadSlider.value = normalTimer;
         reloadSlider.minValue = 0;
         reloadSlider.maxValue = reloadTime;
+        chargeReloadSlider.maxValue = chargeReloadTime;
+
+        GameManager.Instance.RegisterListener(this);
     }
 
     /// <summary>
@@ -48,7 +57,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-
         HandleMovement();
         HandleShooting();
     }
@@ -115,51 +123,72 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void HandleShooting()
+    {
+        NormalShot();
+        ChargeShot();
+    }
+    private void NormalShot()
+    {
+        if (!normalShotAvailable) return;
+
+        normalTimer += Time.deltaTime;
+        reloadSlider.value = normalTimer;
+        if (normalTimer < reloadTime)
+            return;
+
+        Debug.Log(normalShotAvailable);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            FireNormalProjectile();
+            normalTimer = 0f;
+        }
+
+    }
+
     /// <summary>
     /// Handles input and reload logic for shooting projectiles.
     /// </summary>
-    private void HandleShooting()
+    private void ChargeShot()
     {
-        timer += Time.deltaTime;
-        reloadSlider.value = timer;
+        if (!chargedShotAvailable) return;
 
-        if (timer < reloadTime)
+        chargeReloadTimer += Time.deltaTime;
+        chargeReloadSlider.value = chargeReloadTimer;
+
+        if (chargeReloadTimer < chargeReloadTime)
             return;
 
         // Start charging when Space is held
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            isCharging = true;
             chargeTimer = 0f;
+            chargeReloadSlider.value = 0f;
         }
 
         // Continue charging
-        if (Input.GetKey(KeyCode.Space) && isCharging)
+        if (Input.GetKey(KeyCode.Space))
         {
             chargeTimer += Time.deltaTime;
         }
 
         // Fire based on duration when key is released
-        if (Input.GetKeyUp(KeyCode.Space) && isCharging)
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             if (chargeTimer >= chargeTime)
             {
                 FireChargedProjectile();
+                chargeReloadTimer = 0f;
             }
-            else
-            {
-                FireProjectile();
-            }
-
-            isCharging = false;
-            canFire = false;
-            timer = 0f;
+            chargeTimer = 0f;
         }
     }
+
     /// <summary>
     /// Instantiates a standard projectile at the fire point.
     /// </summary>
-    private void FireProjectile()
+    private void FireNormalProjectile()
     {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
     }
@@ -171,28 +200,33 @@ public class PlayerController : MonoBehaviour
     {
         GameObject chargedShot = Instantiate(chargedProjectilePrefab, firePoint.position, Quaternion.identity);
     }
-    //private void HandleShooting()
-    //{
-    //    timer += Time.deltaTime;
-    //    reloadSlider.value = timer;
-    //    if (timer > reloadTime)
-    //    {
-    //        canFire = true;
-    //    }
 
-    //    if (Input.GetKeyDown(KeyCode.Space) && canFire)
-    //    {
-    //        canFire = false;
-    //        FireProjectile();
-    //        timer = 0f;
-    //    }
-    //}
-
-    ///// <summary>
-    ///// Instantiates a projectile at the fire point.
-    ///// </summary>
-    //private void FireProjectile()
-    //{
-    //    GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-    //} 
+    public void OnFocusChanged(Focus newFocus)
+    {
+        Debug.Log(newFocus);
+        switch (newFocus) {
+            case Focus.Low:
+                reloadTime = 3f;
+                normalShotAvailable = false;
+                chargedShotAvailable = false;
+                break;
+            case Focus.Normal:
+                reloadTime = 2f;
+                normalShotAvailable = true;
+                chargedShotAvailable = false;
+                break;
+            case Focus.Medium:
+                reloadTime = 1f;
+                normalShotAvailable = true;
+                chargedShotAvailable = false;
+                break;
+            case Focus.High:
+                reloadTime = 0.5f;
+                normalShotAvailable = true;
+                chargedShotAvailable = true;
+                chargeReloadTimer = 7.0f;
+                break;
+        }
+        reloadSlider.maxValue = reloadTime;
+    }
 }

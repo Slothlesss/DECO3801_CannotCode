@@ -1,6 +1,7 @@
 public enum Fatigue
 {
-    Fresh,
-    Tired,
-    Exhausted
+    Normal,
+    Mild,
+    Moderate,
+    High
 }
