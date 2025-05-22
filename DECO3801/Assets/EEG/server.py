@@ -15,12 +15,15 @@ CLIENT_SECRET = "TEYPdQVHWgXcc4HZDDG6WZreO7iaD0ZDyweoCu0yuFts2T2MaeBlxaWqm3WxQHr
 
 class CortexClient:
     def __init__(self):
+        # for websocket
         self.ws = None
         self.auth_token = None
         self.headset_id = None
         self.session_id = None
         self.request_id = 1
         self.lock = threading.Lock()
+        
+        # for data processing
         self.data = []
         self.columns = []
         self.model = joblib.load('stress_model.pkl')
@@ -171,6 +174,7 @@ class CortexClient:
             self.send_levels_to_unity()
 
         elif "met" in response:
+            # deal with met data
             met_values = response["met"]
             if not self.columns_met:
                 return  
@@ -197,6 +201,7 @@ class CortexClient:
             
     def frustration_level(self):
         current_time = time.time()
+        # print the value if the time interval is more than 1 second for checking
         if len(self.buffer) >= self.window_size and current_time - self.last_frustration_time >= 1:
             segment = pd.DataFrame(self.buffer[-self.window_size:])
             features = self.extract_features(segment)
@@ -216,7 +221,7 @@ class CortexClient:
 
     def fatigue_level(self, relax):
         current_time = time.time()
-
+        # print the value if the time interval is more than 1 second for checking
         if current_time - self.last_fatigue_time < 1:
             return None 
         
@@ -234,19 +239,19 @@ class CortexClient:
         
     def focus_level(self, interest):
         current_time = time.time()
-
+        # print the value if the time interval is more than 1 second for checking
         if current_time - self.last_focus_time < 1:
             return None 
         
         self.last_focus_time = current_time
 
-        if 0 < interest < 0.20:
+        if 0 < interest < 0.40:
             print(f"interest={interest:.2f} → focus=2")
             return 2
-        elif 0.20 <= interest < 0.40:
+        elif 0.40 <= interest < 0.50:
             print(f"interest={interest:.2f} → focus=3")
             return 3
-        elif interest >= 0.40:
+        elif interest >= 0.50:
             print(f"interest={interest:.2f} → focus=4")
             return 4
     
@@ -290,6 +295,8 @@ class CortexClient:
         print(f"Unity connected from {addr}")
 
     def send_levels_to_unity(self):
+
+        # Send the levels to Unity via TCP per 1s
         current_time = time.time()
         if self.tcp_client is None:
             return
