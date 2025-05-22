@@ -17,7 +17,7 @@
 - `README.md`: Project documentation, including installation and usage instructions.  
 
 ## Usage
-- run `send_to_unity.py` then run unity
+- run `servery.py` then run unity
 
 
 ## References
