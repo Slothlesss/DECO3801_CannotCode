@@ -108,8 +108,8 @@ Players can choose between 1 Player or 2 Player mode using left/right buttons.
 </p>
 
 The headset will detect your level of frustration, fatigue and focus:
-- Frustration: Increases game difficulty. The more frustrated you are, the harder the game becomes => so try to stay calm.
-- Fatigue: Triggers additional obstacles. Higher fatigue levels introduce more challenges in the environment.
+- Frustration: Triggers additional obstacles. Higher fatigue levels introduce more challenges in the environment.
+- Fatigue: Increases game difficulty. The more frustrated you are, the harder the game becomes => so try to stay calm. 
 - Focus: Unlocks and strengthens your weapon. The more focused you are, the more powerful your weapon becomes.
 
 ## License
