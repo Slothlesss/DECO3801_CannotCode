@@ -204,7 +204,7 @@ class CortexClient:
             prediction = self.model.predict(features_scaled)[0]
             
             label_map = {0: 'Relax', 1: 'Mild Stress', 2: 'High Stress'}
-            frustration_map = {0: 2, 1: 3, 2: 4}
+            frustration_map = {0: 1, 1: 2, 2: 3}
             label = label_map[prediction]
             frustration = frustration_map[prediction]
 
@@ -223,14 +223,14 @@ class CortexClient:
         self.last_fatigue_time = current_time
 
         if 0 < relax < 0.20:
-            print(f"relax={relax:.2f} → fatigue=4")
-            return 4
-        elif 0.20 <= relax < 0.40:
             print(f"relax={relax:.2f} → fatigue=3")
             return 3
-        elif relax >= 0.40:
+        elif 0.20 <= relax < 0.40:
             print(f"relax={relax:.2f} → fatigue=2")
             return 2
+        elif relax >= 0.40:
+            print(f"relax={relax:.2f} → fatigue=1")
+            return 1
         
     def focus_level(self, interest):
         current_time = time.time()
@@ -241,14 +241,14 @@ class CortexClient:
         self.last_focus_time = current_time
 
         if 0 < interest < 0.20:
+            print(f"interest={interest:.2f} → focus=1")
+            return 1
+        elif 0.20 <= interest < 0.30:
             print(f"interest={interest:.2f} → focus=2")
             return 2
-        elif 0.20 <= interest < 0.40:
+        elif interest >= 0.30:
             print(f"interest={interest:.2f} → focus=3")
             return 3
-        elif interest >= 0.40:
-            print(f"interest={interest:.2f} → focus=4")
-            return 4
     
     
     def on_error(self, ws, error):

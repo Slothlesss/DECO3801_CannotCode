@@ -2657,7 +2657,7 @@ MonoBehaviour:
   frustration: 0
   fatigue: 0
   focus: 0
-  randomMode: 1
+  randomMode: 0
   interval: 7
 --- !u!4 &333976551
 Transform:
@@ -13221,7 +13221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2098382375
 MonoBehaviour:
   m_ObjectHideFlags: 0
