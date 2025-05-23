@@ -44,13 +44,20 @@ git clone https://github.com/Slothlesss/DECO3801_CannotCode
 - Open the file using Visual Studio Code (or any Python-supporting IDE).
 - Right-click the file tab → select "Reveal in File Explorer" (Windows) or "Reveal in Finder" (Mac).
 - In the File Explorer/Finder window, copy the path.
-- In the terminal, run:
+- For windows: In the terminal, run:
 
    ```
    pip install -r requirements.txt
    cd "D:\Project\GitHub\DECO3801_CannotCode\DECO3801\Assets\EEG
    python server.py
    ```
+- For MacOS: open EEG folder in terminal, then run:
+
+    ```
+    pip3 install -r requirements.txt
+    cd '' && '/usr/local/bin/python3'  'server.py'  && echo Exit status: $? && exit 1
+    ```
+
 - If its the first time connecting, Click "Approve" in Emotiv Launcher.
 
 ### 4. Start the game
