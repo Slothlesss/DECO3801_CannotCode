@@ -32,6 +32,8 @@ public class EEGReceiver : MonoBehaviour
         stream = client.GetStream();
         Debug.Log("Connected to Python TCP server!");
 
+        DontDestroyOnLoad(this);
+
         currentFrustration = receivedFrustration = 0;
         currentFatigue = receivedFatigue = 0;
         currentFocus = receivedFocus = 0;
@@ -44,8 +46,8 @@ public class EEGReceiver : MonoBehaviour
         UpdateEmotionalState(ref currentFatigue, ref receivedFatigue, ref fatigueTimer, "Fatigue");
         UpdateEmotionalState(ref currentFocus, ref receivedFocus, ref focusTimer, "Focus");
         GameManager.Instance.SetFrustration((Frustration)currentFrustration);
-        GameManager.Instance.SetFatigue((Fatigue)currentFrustration);
-        GameManager.Instance.SetFocus((Focus)currentFrustration);
+        GameManager.Instance.SetFatigue((Fatigue)currentFatigue);
+        GameManager.Instance.SetFocus((Focus)currentFocus);
     }
 
     private void ReceiveMessage()
