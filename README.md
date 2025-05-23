@@ -1,9 +1,6 @@
-[Link to Unity files.](https://github.com/Slothlesss/DECO3801_CannotCode/tree/main)
-
 # [Mind Over Matter](https://github.com/Slothlesss/DECO3801_CannotCode/tree/main)
 <p align="center">
     <img src="https://github.com/user-attachments/assets/c0788285-240f-4d2a-b186-e4d2e837d968" />
-
 </p>
         
 ## Overview
