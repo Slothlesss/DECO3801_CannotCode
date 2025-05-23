@@ -35,7 +35,9 @@ git clone https://github.com/Slothlesss/DECO3801_CannotCode
 
 ### 2. Setup EEG headset
 - Download the Emotiv Launcher from https://www.emotiv.com/pages/download-emotiv-launcher
-- Sign in with EmotivID: cannotcode1 and passsword: Cannotcode11
+- Sign in with:
+    - EmotivID: cannotcode1
+    - Password: Cannotcode11
 - Wear headset by instruction.
 - Click "Connect" until you reach "Close".
 
