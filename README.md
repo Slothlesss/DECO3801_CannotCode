@@ -37,7 +37,7 @@ git clone https://github.com/Slothlesss/DECO3801_CannotCode
 
 
 
-### 2. Setup headset
+### 2. Setup EEG headset
 - Download the Emotiv Launcher from https://www.emotiv.com/pages/download-emotiv-launcher
 - Sign in with EmotivID: cannotcode1 and passsword: Cannotcode11
 - Wear headset by instruction.
@@ -78,11 +78,12 @@ Players can choose between 1 Player or 2 Player mode using left/right buttons.
 
 ### 2. Player Movement
 - Player 1 (Left side)
-    + Go Up: A
-    + Go Down: W
+    + Move Up: W
+    + Move Down: S
+    + Shoot: Spacebar
+    + Charge Shot: Press and hold spacebar
 - Player 2 (Right side)
-    + Go Up: ↑ (Up Arrow)
-    + Go Down: ↓ (Down Arrow)
+    + Shoot: P
  
 ### 3. Obstacles
 - Asteroid
@@ -115,7 +116,7 @@ The headset will detect your level of frustration, fatigue and focus:
 
 ## License
 Current assets used:
-- Talia's arts.
+- Talia's pixel art.
 - Free UI Hologram Interface - https://wenrexa.itch.io/holoui
 - Assets Free Laser Bullets Pack 2020 - https://wenrexa.itch.io/laser2020
 
