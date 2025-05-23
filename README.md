@@ -1,13 +1,13 @@
 [Link to Unity files.](https://github.com/Slothlesss/DECO3801_CannotCode/tree/main)
 
-# DECO3801_CannotCode
+# Mind Over Matter
 <p align="center">
 <!--     <img src="https://github.com/user-attachments/assets/d3fee8bb-6340-4fee-b9f2-c201fcfd1047" /> -->
     <img src="https://github.com/user-attachments/assets/c0788285-240f-4d2a-b186-e4d2e837d968" />
 
 </p>
         
-## Welcome to "Mind Over Matter"
+## Overview
 Mind Over Matter is a brain-computer interaction (BCI) powered 2D side scroller game in which players control a spaceship and must fly as far as possible without crashing. The player will have to avoid procedurally generated obstacles including asteroids, moons, planets and other spaceships. Certain obstacles can also be shot by the laser cannons on the player’s ship to destroy them. The player’s ship will be controlled using the traditional paradigm of a keyboard, however the game’s environment will automatically adapt to the user’s cognitive state based on data sent by an EEG (electroencephalogram) headset.
 
 ## Table Of Contents
@@ -19,7 +19,7 @@ Mind Over Matter is a brain-computer interaction (BCI) powered 2D side scroller 
 - [How To Play](#how-to-play)
     + [1. Player Mode Selection](#1-player-mode-selection)
     + [2. Player Movement](#2-player-movement)
-- [Lisence](#license)
+- [License](#license)
 
 
 ## Getting Started
