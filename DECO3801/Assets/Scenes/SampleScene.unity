@@ -3391,20 +3391,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Step 1: Connect your EEG headset.
+  m_text: 'Step 1: Connect your EEG headset using the EMOTIV Launcher (further instructions
+    can be found in our GitHub).
 
 
-    Step 2: Use WASD to move your
-    ship, and spacebar to shoot. In 2 Player mode, Player 2 can click to try and
-    shoot you!
+    Step 2: Use WASD to move your ship, and spacebar
+    to shoot. If your focus is high enough, you can hold spacebar for a charge shot.
+    In 2 Player mode, Player 2 can press P to try and shoot you!
 
 
-    Step 3: The difficulty will adapt to your cognitive load. Try
-    and stay calm!
+    Step 3: The
+    difficulty will adapt to your cognitive load. Try and stay calm!
 
 
-    Step 4: Collect coins and fly as far as you can to get the
-    highest score!'
+    Step 4:
+    Collect coins and fly as far as you can to get the highest score!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
